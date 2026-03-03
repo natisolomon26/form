@@ -1,35 +1,69 @@
-export default function Hero() {
+"use client";
+
+import { motion } from "framer-motion";
+
+interface HeroProps {
+  backgroundImage?: string;
+}
+
+export default function Hero({ backgroundImage = "/hero-bg.jpg" }: HeroProps) {
   return (
-    <section className="pt-32 pb-24 px-6">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl md:text-6xl font-bold leading-tight">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${backgroundImage}')` }}
+        />
+        {/* Dark sky gradient overlay - sky-900 dark theme */}
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-900/95 via-sky-800/95 to-sky-900/95" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+        <motion.h1 
+          className="text-5xl md:text-7xl font-bold leading-tight"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           Measuring Gospel Impact
-          <span className="block text-primary mt-2">
+          <span className="block text-sky-300 mt-2">
             Across Ethiopian Campuses
           </span>
-        </h2>
+        </motion.h1>
 
-        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+        <motion.p 
+          className="mt-6 text-xl text-white/90 max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           A centralized outreach data platform for Christian fellowship
           students and supervisors to track, analyze, and grow
           campus impact.
-        </p>
+        </motion.p>
 
-        <div className="mt-10 flex justify-center gap-4">
+        <motion.div 
+          className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           <a
             href="#mission"
-            className="px-6 py-3 rounded-2xl bg-primary text-white font-medium hover:bg-blue-800 transition"
+            className="px-8 py-4 bg-white text-sky-900 font-semibold rounded-xl hover:bg-sky-50 transition shadow-lg hover:shadow-xl"
           >
             Learn More
           </a>
-
           <a
             href="/admin/login"
-            className="px-6 py-3 rounded-2xl border border-gray-300 font-medium hover:bg-gray-100 transition"
+            className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition backdrop-blur-sm"
           >
             Admin Access
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
