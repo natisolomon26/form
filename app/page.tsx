@@ -1,10 +1,11 @@
 import Hero from "@/components/Hero";
+import Mission from "@/components/Mission";
 
 export default function Home() {
   return (
     <main>
       <Hero backgroundImage="images/bg-5.jpg" />
-      
+      <Mission />  
     </main>
   );
 }
