@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import { 
-  AreaChart, 
-  Area, 
   BarChart, 
   Bar, 
   XAxis, 
@@ -11,39 +9,65 @@ import {
   CartesianGrid, 
   Tooltip, 
   ResponsiveContainer,
-  Legend,
-  PieChart,
-  Pie,
-  Cell
+  Cell,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar
 } from 'recharts';
-import { TrendingUp, Calendar, Download, MoreVertical } from "lucide-react";
+import { Users, MapPin, Award, TrendingUp } from "lucide-react";
 
-const weeklyData = [
-  { day: "Mon", outreach: 120, followups: 80, impact: 200 },
-  { day: "Tue", outreach: 145, followups: 95, impact: 240 },
-  { day: "Wed", outreach: 180, followups: 120, impact: 300 },
-  { day: "Thu", outreach: 165, followups: 110, impact: 275 },
-  { day: "Fri", outreach: 200, followups: 140, impact: 340 },
-  { day: "Sat", outreach: 240, followups: 170, impact: 410 },
-  { day: "Sun", outreach: 190, followups: 130, impact: 320 }
+// Define types
+interface CampusData {
+  name: string;
+  students: number;
+  fellowships: number;
+  growth: number;
+}
+
+interface RadarData {
+  metric: string;
+  AAU: number;
+  Adama: number;
+  BahirDar: number;
+}
+
+interface TooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    name: string;
+    value: number;
+    payload?: any;
+  }>;
+  label?: string;
+}
+
+const campusData: CampusData[] = [
+  { name: "AAU", students: 850, fellowships: 12, growth: 15 },
+  { name: "Adama", students: 620, fellowships: 8, growth: 12 },
+  { name: "Bahir Dar", students: 540, fellowships: 7, growth: 18 },
+  { name: "Mekelle", students: 480, fellowships: 6, growth: 8 },
+  { name: "Hawassa", students: 390, fellowships: 5, growth: 22 },
+  { name: "Jimma", students: 320, fellowships: 4, growth: 10 }
 ];
 
-const campusPieData = [
-  { name: "AAU", value: 850, color: "#0C4A6E" },
-  { name: "Adama", value: 620, color: "#155E75" },
-  { name: "Bahir Dar", value: 540, color: "#0369A1" },
-  { name: "Mekelle", value: 480, color: "#0284C7" },
-  { name: "Others", value: 390, color: "#38BDF8" }
+const radarData: RadarData[] = [
+  { metric: "Outreach", AAU: 90, Adama: 85, BahirDar: 88 },
+  { metric: "Follow-up", AAU: 75, Adama: 70, BahirDar: 82 },
+  { metric: "Discipleship", AAU: 85, Adama: 78, BahirDar: 80 },
+  { metric: "Training", AAU: 70, Adama: 75, BahirDar: 78 },
+  { metric: "Community", AAU: 88, Adama: 82, BahirDar: 85 }
 ];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-sky-900 text-white p-3 rounded-lg shadow-lg border border-sky-700">
         <p className="text-sm font-semibold mb-1">{label}</p>
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry, index) => (
           <p key={index} className="text-xs text-sky-200">
-            {entry.name}: {entry.value} students
+            {entry.name}: {entry.value} {entry.name === "growth" ? "%" : ""}
           </p>
         ))}
       </div>
@@ -52,163 +76,145 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export default function ChartsRow() {
+export default function Distributions() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-      {/* Weekly Outreach Chart */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Campus Bar Chart */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
       >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-sky-900 to-sky-700 rounded-xl flex items-center justify-center">
-              <Calendar className="w-5 h-5 text-white" />
+              <MapPin className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h2 className="font-semibold text-sky-900">Weekly Outreach</h2>
-              <p className="text-xs text-sky-700/70">Last 7 days activity</p>
+              <h2 className="font-semibold text-sky-900">Campus Engagement</h2>
+              <p className="text-xs text-sky-700/70">Students per campus</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-sky-50 rounded-lg transition">
-              <Download size={18} className="text-sky-700" />
-            </button>
-            <button className="p-2 hover:bg-sky-50 rounded-lg transition">
-              <MoreVertical size={18} className="text-sky-700" />
-            </button>
+            <div className="px-3 py-1 bg-sky-50 rounded-full">
+              <span className="text-xs font-medium text-sky-900">Top 6 Campuses</span>
+            </div>
           </div>
         </div>
 
-        <div className="h-72">
+        <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={weeklyData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="outreachGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0C4A6E" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#0C4A6E" stopOpacity={0}/>
-                </linearGradient>
-                <linearGradient id="impactGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0284C7" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#0284C7" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis 
-                dataKey="day" 
-                stroke="#64748B"
-                tick={{ fill: '#64748B', fontSize: 12 }}
-              />
+            <BarChart data={campusData} layout="vertical" margin={{ left: 20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" horizontal={false} />
+              <XAxis type="number" stroke="#64748B" tick={{ fill: '#64748B', fontSize: 12 }} />
               <YAxis 
-                stroke="#64748B"
+                dataKey="name" 
+                type="category" 
+                stroke="#64748B" 
                 tick={{ fill: '#64748B', fontSize: 12 }}
+                width={80}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Legend 
-                wrapperStyle={{ paddingTop: 20 }}
-                formatter={(value) => <span className="text-sky-900 text-sm font-medium">{value}</span>}
-              />
-              <Area 
-                type="monotone" 
-                dataKey="impact" 
-                stroke="#0C4A6E" 
-                strokeWidth={3}
-                fill="url(#impactGradient)" 
-                name="Total Impact"
-                dot={{ r: 4, fill: "#0C4A6E", strokeWidth: 2, stroke: "white" }}
-                activeDot={{ r: 6, fill: "#0C4A6E", strokeWidth: 2, stroke: "white" }}
-              />
-              <Area 
-                type="monotone" 
-                dataKey="outreach" 
-                stroke="#0284C7" 
-                strokeWidth={2}
-                fill="url(#outreachGradient)" 
-                name="Outreach"
-                dot={{ r: 3, fill: "#0284C7", strokeWidth: 2, stroke: "white" }}
-              />
-            </AreaChart>
+              <Bar 
+                dataKey="students" 
+                radius={[0, 8, 8, 0]}
+                barSize={20}
+              >
+                {campusData.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={`rgba(12, 74, 110, ${0.6 + (index * 0.07)})`}
+                    className="hover:opacity-80 transition-opacity"
+                  />
+                ))}
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Stats Summary */}
-        <div className="mt-4 flex items-center justify-between pt-4 border-t border-gray-100">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-sky-700" />
-            <span className="text-sm text-sky-700/70">+24% growth this week</span>
-          </div>
-          <div className="flex gap-3">
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-sky-900" />
-              <span className="text-xs text-sky-700/70">Impact</span>
+        {/* Growth indicators */}
+        <div className="mt-4 grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
+          {campusData.slice(0, 3).map((campus) => (
+            <div key={campus.name} className="text-center">
+              <p className="text-xs text-sky-700/70 mb-1">{campus.name}</p>
+              <div className="flex items-center justify-center gap-1">
+                <TrendingUp className="w-3 h-3 text-sky-700" />
+                <span className="text-sm font-semibold text-sky-900">+{campus.growth}%</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-sky-500" />
-              <span className="text-xs text-sky-700/70">Outreach</span>
-            </div>
-          </div>
+          ))}
         </div>
       </motion.div>
 
-      {/* Campus Distribution Chart */}
+      {/* Radar Chart & Stats */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
         className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
       >
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-sky-900 to-sky-700 rounded-xl flex items-center justify-center">
-              <TrendingUp className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <h2 className="font-semibold text-sky-900">Campus Distribution</h2>
-              <p className="text-xs text-sky-700/70">Student engagement by campus</p>
-            </div>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-gradient-to-br from-sky-900 to-sky-700 rounded-xl flex items-center justify-center">
+            <Award className="w-5 h-5 text-white" />
           </div>
-          <button className="p-2 hover:bg-sky-50 rounded-lg transition">
-            <MoreVertical size={18} className="text-sky-700" />
-          </button>
+          <div>
+            <h2 className="font-semibold text-sky-900">Performance Metrics</h2>
+            <p className="text-xs text-sky-700/70">Multi-campus comparison</p>
+          </div>
         </div>
 
-        <div className="h-72 flex items-center justify-center">
+        <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={campusPieData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={90}
-                paddingAngle={5}
-                dataKey="value"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                labelLine={{ stroke: '#0C4A6E', strokeWidth: 1 }}
-              >
-                {campusPieData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
-                    fill={entry.color}
-                    stroke="white"
-                    strokeWidth={2}
-                  />
-                ))}
-              </Pie>
+            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
+              <PolarGrid stroke="#E2E8F0" />
+              <PolarAngleAxis 
+                dataKey="metric" 
+                tick={{ fill: '#0C4A6E', fontSize: 11 }}
+              />
+              <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#64748B', fontSize: 10 }} />
+              <Radar
+                name="AAU"
+                dataKey="AAU"
+                stroke="#0C4A6E"
+                fill="#0C4A6E"
+                fillOpacity={0.3}
+              />
+              <Radar
+                name="Adama"
+                dataKey="Adama"
+                stroke="#0284C7"
+                fill="#0284C7"
+                fillOpacity={0.3}
+              />
               <Tooltip content={<CustomTooltip />} />
-            </PieChart>
+            </RadarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Legend */}
-        <div className="mt-4 grid grid-cols-2 gap-2 pt-4 border-t border-gray-100">
-          {campusPieData.map((item) => (
-            <div key={item.name} className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-              <span className="text-xs text-sky-700/70">{item.name}</span>
-              <span className="text-xs font-medium text-sky-900 ml-auto">{item.value}</span>
+        {/* Quick Stats */}
+        <div className="mt-4 space-y-3 pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-sky-700" />
+              <span className="text-sm text-sky-700/70">Total Students</span>
             </div>
-          ))}
+            <span className="font-bold text-sky-900">3,200</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-sky-700" />
+              <span className="text-sm text-sky-700/70">Active Campuses</span>
+            </div>
+            <span className="font-bold text-sky-900">12</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-4 h-4 text-sky-700" />
+              <span className="text-sm text-sky-700/70">Avg. Growth</span>
+            </div>
+            <span className="font-bold text-sky-900">14.2%</span>
+          </div>
         </div>
       </motion.div>
     </div>
