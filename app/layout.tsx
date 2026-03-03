@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ethiopian Campus Outreach",
+  title: "EvaSUE",
   description: "Measuring Gospel Impact Across Ethiopian Campuses",
 };
 

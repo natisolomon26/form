@@ -40,8 +40,8 @@ export default function Hero({ backgroundImage = "/hero-bg.jpg" }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          A centralized outreach data platform for Christian fellowship
-          students and supervisors to track, analyze, and grow
+          A centralized outreach data platform for EvaSUE
+          to track, analyze, and grow
           campus impact.
         </motion.p>
 
@@ -52,7 +52,7 @@ export default function Hero({ backgroundImage = "/hero-bg.jpg" }: HeroProps) {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <a
-            href="/admin/login"
+            href="/admin/signup"
             className="px-7 py-2.5 border-2 border-white text-white font-semibold rounded-3xl hover:bg-white/10 transition backdrop-blur-sm"
           >
             Get Started
