@@ -25,13 +25,8 @@ export default function DashboardSidebar() {
 
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+    { icon: Users, label: "Registrants", href: "/dashboard/students" },
     { icon: FormInput, label: "Forms", href: "/dashboard/form" },
-    { icon: FileText, label: "Outreach Reports", href: "/dashboard/reports" },
-    { icon: Users, label: "Students", href: "/dashboard/students" },
-    { icon: BarChart3, label: "Analytics", href: "/dashboard/analytics" },
-    { icon: Calendar, label: "Events", href: "/dashboard/events" },
-    { icon: Settings, label: "Settings", href: "/dashboard/settings" },
-    { icon: HelpCircle, label: "Help", href: "/dashboard/help" },
   ];
 
   const isActive = (href: string) => {

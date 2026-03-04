@@ -39,8 +39,7 @@ export default function StudentRegister() {
 
   const roles = [
     { value: "main-leader", label: "Main Leader", icon: Heart },
-    { value: "evangelism-mobilizer", label: "Evangelism Mobilizer", icon: Globe },
-    { value: "member", label: "General Member", icon: User }
+    { value: "evangelism-mobilizer", label: "Evangelism Mobilizer", icon: Globe }
   ];
 
   const bibleVerses = [

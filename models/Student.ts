@@ -4,7 +4,7 @@ export interface IStudent {
   fullName: string;
   phoneNumber: string;
   campus: string;
-  role: 'main-leader' | 'evangelism-mobilizer' | 'member';
+  role: 'main-leader' | 'evangelism-mobilizer';
   registeredAt: Date;
 }
 
@@ -27,7 +27,7 @@ const studentSchema = new mongoose.Schema<IStudent>({
   role: {
     type: String,
     required: [true, 'Role is required'],
-    enum: ['main-leader', 'evangelism-mobilizer', 'member'],
+    enum: ['main-leader', 'evangelism-mobilizer' ],
   },
   registeredAt: {
     type: Date,
