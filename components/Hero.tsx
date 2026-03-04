@@ -3,7 +3,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Globe } from "lucide-react";
+import { 
+  ArrowRight, 
+  Sparkles, 
+  Globe, 
+  MapPin, 
+  Clock, 
+  Heart, 
+  Calendar,
+  Church,
+  Users
+} from "lucide-react";
 
 interface HeroProps {
   backgroundImage?: string;
@@ -51,12 +61,18 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         line1: "Eastern Evangelistic",
         line2: "Outreach"
       },
-      subtitle: {
-        full: "Jesus Is All About Life",
-        short: "JAAL"
-      },
-      description: "A centralized data platform to track, analyze, and dramatically grow our campus evangelism impact across Ethiopia.",
-      cta: "Register Now !",
+      subtitle: "Jesus Is All About Life • JAAL",
+      question: "Are you ready to see lives transformed in Addis Ababa? 🇪🇹✨",
+      description: "EvaSUE and African Evangelistic Enterprise (AEE-Ethiopia) are teaming up for the \"Jesus is All About Life\" (JAAL) Easter Outreach this April! Our goal is simple: Reach every campus and beyond with the hope of the Gospel.",
+      training: "To get mission-ready, we are hosting a Full Day Training & Consultation on Mar 14, 2026, exclusively for Main Leaders and Evan & Mission Mobilizers Leaders.",
+      locations: [
+        { name: "Central 1 campuses", location: "Megenagna Full Gospel Church" },
+        { name: "Central 2 campuses", location: "Lideta Assemblies of God Church" }
+      ],
+      time: "8:30 AM – 5:00 PM",
+      cost: "FREE (Registration is required!)",
+      verse: "\"...In his great mercy he has given us new birth into a living hope...\" (1 Peter 1:3)",
+      cta: "Register Now",
       admin: "Admin"
     },
     am: {
@@ -65,12 +81,18 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         line1: "የምስራቅ",
         line2: "ወንጌላዊ አገልግሎት"
       },
-      subtitle: {
-        full: "ኢየሱስ ስለ ሕይወት ሁሉ ነው",
-        short: "JAAL"
-      },
-      description: "በመላው ኢትዮጵያ የካምፓስ ወንጌል ተፅእኖን ለመከታተል፣ ለመተንተን እና በከፍተኛ ደረጃ ለማሳደግ የተማከለ የመረጃ መድረክ።",
-      cta: "አሁን ይመዝገቡ!",
+      subtitle: "ኢየሱስ ስለ ሕይወት ሁሉ ነው • JAAL",
+      question: "የወንጌል ጥሪ ለአዲስ አበባ ካምፓሶች! 🇪🇹✨",
+      description: "ኢቫሱ (EvaSUE) ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE) ጋር በመተባበር \"ኢየሱስ ለጥያቄ ሁሉ መልስ ነው\" (JAAL) በሚል መሪ ቃል ታላቅ የትንሳኤ ወንጌል ዘመቻ አዘጋጅቷል።",
+      training: "ለዚህ ታላቅ ተልዕኮ ራሳችንን የምናዘጋጅበት የሙሉ ቀን ሥልጠና መጋቢት 07 ቀን 2026 ይጠብቀናል!",
+      locations: [
+        { name: "ለሴንትራል 1 ተማሪዎች", location: "መገናኛ ሙሉ ወንጌል ቤተክርስቲያን" },
+        { name: "ለሴንትራል 2 ተማሪዎች", location: "ልደታ የእግዚአብሔር አምባ ቤተክርስቲያን" }
+      ],
+      time: "ከጠዋቱ 2፡30 እስከ ቀኑ 11፡00 ሰዓት",
+      cost: "በነጻ (ግን አስቀድሞ መመዝገብ አስፈላጊ ነው)",
+      verse: "\"...እርሱ ከታላቅ ምሕረቱ የተነሣ በኢየሱስ ክርስቶስ ከሞት መነሣት ምክንያት ለሕያው ተስፋ በሚሆን አዲስ ልደት...\" (1ኛ ጴጥሮስ 1:3)",
+      cta: "አሁን ይመዝገቡ",
       admin: "አስተዳዳሪ"
     }
   };
@@ -103,7 +125,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
   };
 
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-sky-950">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-sky-950">
       {/* Parallax Background Image */}
       <motion.div
         className="absolute inset-0 w-full h-[120%] -top-[10%] bg-cover bg-center origin-center"
@@ -118,9 +140,9 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       />
 
       {/* Animated Overlay Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-b from-sky-950 via-sky-900 to-sky-950 opacity-90 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-sky-950 via-sky-900/95 to-sky-950 opacity-95 z-0" />
       <motion.div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.15)_0%,transparent_60%)] z-0"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.15)_0%,transparent_70%)] z-0"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.5, 0.8, 0.5]
@@ -158,14 +180,13 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         </div>
       )}
 
-      {/* Language Toggle & Admin Login - Combined on Right */}
+      {/* Language Toggle & Admin Login */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 1.5, type: "spring" }}
         className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2"
       >
-        {/* Language Toggle */}
         <button
           onClick={toggleLanguage}
           className="group flex items-center gap-2 px-3 py-2 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full border border-white/10 transition-all duration-300"
@@ -176,81 +197,128 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
           </span>
         </button>
 
-        {/* Admin Login */}
-        
       </motion.div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full px-4 sm:px-6 flex flex-col items-center justify-center text-center mt-12 sm:mt-0 pt-10 sm:pt-0">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="max-w-4xl mx-auto flex flex-col items-center"
-        >
-          {/* Badge */}
-          <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/20 backdrop-blur-md">
-              <Sparkles className="w-4 h-4 text-sky-400" />
-              <span className="text-xs sm:text-sm font-bold text-sky-200 tracking-wider uppercase">
-                {t.badge}
-              </span>
-            </div>
-          </motion.div>
+      {/* Main Content - Scrollable Area */}
+      <div className="relative z-10 w-full h-full overflow-y-auto py-16 sm:py-20 md:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="max-w-5xl mx-auto"
+          >
+           
 
-          {/* Title */}
-          <motion.h1 variants={itemVariants} className="text-[11.5vw] sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-2 sm:mb-4 drop-shadow-2xl flex flex-col gap-0.5 sm:gap-2">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
-              {t.title.line1}
-            </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-sky-100 to-sky-300">
-              {t.title.line2}
-            </span>
-          </motion.h1>
+            {/* Title */}
+            <motion.div variants={itemVariants} className="text-center mb-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
+                  {t.title.line1}
+                </span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-sky-100 to-sky-300">
+                  {t.title.line2}
+                </span>
+              </h1>
+            </motion.div>
 
-          {/* Subtitle */}
-          <motion.div variants={itemVariants} className="mt-3 sm:mt-6 mb-7 sm:mb-8 relative w-full">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-sky-100/90 tracking-wide flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-              <span className="leading-tight">{t.subtitle.full}</span>
-              <span className="hidden sm:inline text-sky-400/50">•</span>
-              <span className="relative z-10">{t.subtitle.short}</span>
-            </h2>
-          </motion.div>
+            {/* Subtitle with divider */}
+            <motion.div variants={itemVariants} className="text-center mb-8">
+              <div className="inline-flex items-center gap-3 px-6 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
+                <Church className="w-4 h-4 text-sky-400" />
+                <span className="text-sm sm:text-base font-bold text-sky-200">{t.subtitle}</span>
+              </div>
+            </motion.div>
 
-          {/* Description */}
-          <motion.p variants={itemVariants} className="text-[15px] sm:text-base md:text-lg text-sky-100 max-w-2xl font-bold leading-relaxed px-2 sm:px-4 mb-8 sm:mb-10 drop-shadow-lg">
-            {t.description}
-          </motion.p>
+            {/* Question */}
+            <motion.div variants={itemVariants} className="text-center mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">
+                {t.question}
+              </h2>
+            </motion.div>
 
-          {/* CTA Box */}
-          <motion.div variants={itemVariants}>
-            <Link href="/register" className="group relative inline-flex">
-              {/* Outer Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-sky-400 via-blue-500 to-sky-300 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 group-hover:duration-200 animate-tilt"></div>
+            {/* Description */}
+            <motion.div variants={itemVariants} className="max-w-3xl mx-auto text-center mb-8">
+              <p className="text-sm sm:text-base text-sky-100/90 leading-relaxed">
+                {t.description}
+              </p>
+            </motion.div>
 
-              {/* Button */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="relative flex items-center justify-center gap-2.5 px-6 py-2.5 sm:px-8 sm:py-3 bg-white text-sky-950 font-black text-xs sm:text-sm rounded-full overflow-hidden shadow-xl transition-all"
-              >
-                {/* Button Hover effect background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                <span className="relative z-10 tracking-wide uppercase">{t.cta}</span>
-
-                <div className="relative z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-sky-950 text-white flex items-center justify-center group-hover:bg-sky-500 transition-colors duration-300">
-                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            {/* Training Info */}
+            <motion.div variants={itemVariants} className="max-w-3xl mx-auto mb-10">
+              <div className="bg-white/5 backdrop-blur-md rounded-2xl p-5 border border-white/10">
+                <div className="flex items-start gap-3">
+                  <Calendar className="w-5 h-5 text-sky-400 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm sm:text-base text-sky-100 font-medium">
+                    {t.training}
+                  </p>
                 </div>
-              </motion.button>
-            </Link>
-          </motion.div>
+              </div>
+            </motion.div>
 
-        </motion.div>
+            {/* Locations Grid */}
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-8">
+              {t.locations.map((loc, index) => (
+                <div key={index} className="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-sky-400 flex-shrink-0" />
+                    <div>
+                      <p className="font-bold text-white text-sm sm:text-base mb-1">{loc.name}</p>
+                      <p className="text-xs sm:text-sm text-sky-200/80">{loc.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Time and Cost */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-3xl mx-auto mb-8">
+              <div className="flex items-center gap-2 bg-sky-500/10 rounded-full px-5 py-2.5 border border-sky-400/20">
+                <Clock className="w-4 h-4 text-sky-400" />
+                <span className="text-sm font-semibold text-white">⏰ {t.time}</span>
+              </div>
+              <div className="flex items-center gap-2 bg-green-500/10 rounded-full px-5 py-2.5 border border-green-400/20">
+                <Heart className="w-4 h-4 text-green-400" />
+                <span className="text-sm font-semibold text-white">💰 {t.cost}</span>
+              </div>
+            </motion.div>
+
+            {/* Bible Verse */}
+            <motion.div variants={itemVariants} className="max-w-2xl mx-auto text-center mb-10">
+              <div className="relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-sky-500/20 rounded-full blur-md" />
+                <p className="text-xs sm:text-sm text-sky-200/80 italic px-4">
+                  {t.verse}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div variants={itemVariants} className="flex justify-center">
+              <Link href="/register" className="group relative inline-flex">
+                {/* Outer Glow */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-sky-400 via-blue-500 to-sky-300 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 group-hover:duration-200 animate-tilt"></div>
+
+                {/* Button */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative flex items-center justify-center gap-2.5 px-8 py-3.5 bg-white text-sky-950 font-black text-sm rounded-full overflow-hidden shadow-xl transition-all"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="relative z-10 tracking-wide uppercase">{t.cta}</span>
+                  <div className="relative z-10 w-7 h-7 rounded-full bg-sky-950 text-white flex items-center justify-center group-hover:bg-sky-500 transition-colors duration-300">
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </motion.button>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
 
       {/* Decorative Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-sky-950 to-transparent pointer-events-none z-10" />
     </section>
   );
 }
