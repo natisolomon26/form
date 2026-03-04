@@ -14,7 +14,8 @@ import {
   Globe,
   ChevronDown,
   ArrowRight,
-  ArrowLeft
+  ArrowLeft,
+  AlertCircle
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +29,9 @@ export default function StudentRegister() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [registeredStudent, setRegisteredStudent] = useState<any>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -55,18 +58,37 @@ export default function StudentRegister() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setError(""); // Clear error when user types
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Registration data:", formData);
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      console.log("Registration successful:", data);
+      setRegisteredStudent(data.student);
       setIsSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const containerVariants = {
@@ -81,9 +103,6 @@ export default function StudentRegister() {
     hidden: { opacity: 0, y: 15 },
     show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
   };
-
-  // Prevent hydration mismatch on the verse by showing empty space briefly if needed
-  // but it's fine since we set the initial state to bibleVerses[0] statically.
 
   if (isSubmitted) {
     return (
@@ -136,6 +155,13 @@ export default function StudentRegister() {
               </div>
             </div>
           </div>
+
+          {/* Registration ID (Optional - show if you want) */}
+          {registeredStudent?.id && (
+            <p className="text-[10px] text-sky-400 font-mono mb-4">
+              Registration ID: {registeredStudent.id.slice(-8)}
+            </p>
+          )}
 
           <Link
             href="/"
@@ -229,6 +255,18 @@ export default function StudentRegister() {
                 <div className="h-px w-6 bg-sky-300" />
                 <p className="text-[10px] text-sky-600 font-bold tracking-widest uppercase">{currentVerse.reference}</p>
               </div>
+            </motion.div>
+          )}
+
+          {/* Error Message */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 bg-red-50/80 backdrop-blur-sm border border-red-200 rounded-2xl p-3 flex items-start gap-2"
+            >
+              <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-red-600 font-medium">{error}</p>
             </motion.div>
           )}
 

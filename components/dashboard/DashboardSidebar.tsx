@@ -27,7 +27,7 @@ export default function DashboardSidebar() {
     { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
     { icon: FormInput, label: "Forms", href: "/dashboard/form" },
     { icon: FileText, label: "Outreach Reports", href: "/dashboard/reports" },
-    { icon: Users, label: "Fellowships", href: "/dashboard/fellowships" },
+    { icon: Users, label: "Students", href: "/dashboard/students" },
     { icon: BarChart3, label: "Analytics", href: "/dashboard/analytics" },
     { icon: Calendar, label: "Events", href: "/dashboard/events" },
     { icon: Settings, label: "Settings", href: "/dashboard/settings" },
