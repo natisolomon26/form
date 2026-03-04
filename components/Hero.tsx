@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Globe } from "lucide-react";
 
 interface HeroProps {
   backgroundImage?: string;
@@ -21,6 +21,7 @@ const generateParticlePositions = (count: number) => {
 
 export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProps) {
   const [mounted, setMounted] = useState(false);
+  const [language, setLanguage] = useState<'en' | 'am'>('en');
   const particlePositions = useMemo(() => generateParticlePositions(20), []);
   const { scrollY } = useScroll();
   const yBackground = useTransform(scrollY, [0, 1000], [0, 300]);
@@ -28,7 +29,53 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
 
   useEffect(() => {
     setMounted(true);
+    // Load language preference from localStorage
+    const savedLanguage = localStorage.getItem('language') as 'en' | 'am';
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
   }, []);
+
+  // Toggle language function
+  const toggleLanguage = () => {
+    const newLang = language === 'en' ? 'am' : 'en';
+    setLanguage(newLang);
+    localStorage.setItem('language', newLang);
+  };
+
+  // Content in both languages
+  const content = {
+    en: {
+      badge: "EvaSUE Campus Impact Platform",
+      title: {
+        line1: "Eastern Evangelistic",
+        line2: "Outreach"
+      },
+      subtitle: {
+        full: "Jesus Is All About Life",
+        short: "JAAL"
+      },
+      description: "A centralized data platform to track, analyze, and dramatically grow our campus evangelism impact across Ethiopia.",
+      cta: "Register Now !",
+      admin: "Admin"
+    },
+    am: {
+      badge: "ኢቫሱ የካምፓስ ተፅእኖ መድረክ",
+      title: {
+        line1: "የምስራቅ",
+        line2: "ወንጌላዊ አገልግሎት"
+      },
+      subtitle: {
+        full: "ኢየሱስ ስለ ሕይወት ሁሉ ነው",
+        short: "JAAL"
+      },
+      description: "በመላው ኢትዮጵያ የካምፓስ ወንጌል ተፅእኖን ለመከታተል፣ ለመተንተን እና በከፍተኛ ደረጃ ለማሳደግ የተማከለ የመረጃ መድረክ።",
+      cta: "አሁን ይመዝገቡ!",
+      admin: "አስተዳዳሪ"
+    }
+  };
+
+  const t = language === 'en' ? content.en : content.am;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -111,20 +158,26 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         </div>
       )}
 
-      {/* Admin Login Link */}
+      {/* Language Toggle & Admin Login - Combined on Right */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 1.5, type: "spring" }}
-        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2"
       >
-        <Link
-          href="/admin/signin"
-          className="group flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full border border-white/10 transition-all duration-300"
+        {/* Language Toggle */}
+        <button
+          onClick={toggleLanguage}
+          className="group flex items-center gap-2 px-3 py-2 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full border border-white/10 transition-all duration-300"
         >
-          <span className="text-xs font-semibold text-white/70 group-hover:text-white tracking-wide uppercase">Admin</span>
-          <div className="w-1.5 h-1.5 rounded-full bg-sky-400 group-hover:animate-pulse" />
-        </Link>
+          <Globe className="w-3.5 h-3.5 text-sky-400" />
+          <span className="text-xs font-semibold text-white/70 group-hover:text-white tracking-wide">
+            {language === 'en' ? 'አማርኛ' : 'English'}
+          </span>
+        </button>
+
+        {/* Admin Login */}
+        
       </motion.div>
 
       {/* Main Content */}
@@ -140,7 +193,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-400/20 backdrop-blur-md">
               <Sparkles className="w-4 h-4 text-sky-400" />
               <span className="text-xs sm:text-sm font-bold text-sky-200 tracking-wider uppercase">
-                EvaSUE Campus Impact Platform
+                {t.badge}
               </span>
             </div>
           </motion.div>
@@ -148,27 +201,25 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
           {/* Title */}
           <motion.h1 variants={itemVariants} className="text-[11.5vw] sm:text-6xl md:text-7xl lg:text-8xl font-black text-white leading-[1.05] tracking-tight mb-2 sm:mb-4 drop-shadow-2xl flex flex-col gap-0.5 sm:gap-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
-              Eastern Evangelistic
+              {t.title.line1}
             </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-sky-100 to-sky-300">
-              Outreach
+              {t.title.line2}
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.div variants={itemVariants} className="mt-3 sm:mt-6 mb-7 sm:mb-8 relative w-full">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-sky-100/90 tracking-wide flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-              <span className="leading-tight">Jesus Is All About Life</span>
+              <span className="leading-tight">{t.subtitle.full}</span>
               <span className="hidden sm:inline text-sky-400/50">•</span>
-              <span className="relative z-10">JAAL</span>
-
-
+              <span className="relative z-10">{t.subtitle.short}</span>
             </h2>
           </motion.div>
 
           {/* Description */}
           <motion.p variants={itemVariants} className="text-[15px] sm:text-base md:text-lg text-sky-100 max-w-2xl font-bold leading-relaxed px-2 sm:px-4 mb-8 sm:mb-10 drop-shadow-lg">
-            A centralized data platform to track, analyze, and dramatically grow our campus evangelism impact across Ethiopia.
+            {t.description}
           </motion.p>
 
           {/* CTA Box */}
@@ -186,7 +237,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
                 {/* Button Hover effect background */}
                 <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <span className="relative z-10 tracking-wide uppercase">Register Now !</span>
+                <span className="relative z-10 tracking-wide uppercase">{t.cta}</span>
 
                 <div className="relative z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-sky-950 text-white flex items-center justify-center group-hover:bg-sky-500 transition-colors duration-300">
                   <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-0.5 transition-transform" />
