@@ -425,7 +425,7 @@ export default function StudentRegister() {
                   {language === 'en' ? 'Terms' : 'ውሎች'}
                 </Link>
                 {" "}{language === 'en' ? 'and' : 'እና'}{" "}
-                <Link href="/privacy" className="text-sky-400 hover:text-sky-300 transition-colors underline decoration-sky-400/30 underline-offset-2">
+                <Link href="/admin/signin" className="text-sky-400 hover:text-sky-300 transition-colors underline decoration-sky-400/30 underline-offset-2">
                   {language === 'en' ? 'Privacy Policy' : 'የግላዊነት ፖሊሲ'}
                 </Link>
               </p>

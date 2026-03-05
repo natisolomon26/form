@@ -2,13 +2,13 @@
 
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { 
-  AreaChart, 
-  Area, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   Legend,
   PieChart,
@@ -44,6 +44,7 @@ interface CampusPieData {
 }
 
 interface TooltipPayload {
+  fill: string | undefined;
   name: string;
   value: number;
   color?: string;
@@ -58,13 +59,20 @@ interface CustomTooltipProps {
 const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-sky-900 text-white p-3 rounded-lg shadow-lg border border-sky-700">
-        <p className="text-sm font-semibold mb-1">{label}</p>
-        {payload.map((entry, index) => (
-          <p key={index} className="text-xs text-sky-200">
-            {entry.name}: {entry.value}
-          </p>
-        ))}
+      <div className="bg-white/95 backdrop-blur-md text-slate-800 p-4 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100">
+        <p className="text-sm font-bold mb-2 text-slate-900">{label}</p>
+        <div className="flex flex-col gap-1.5">
+          {payload.map((entry, index) => (
+            <div key={index} className="flex items-center gap-2 text-sm font-medium">
+              <div
+                className="w-2.5 h-2.5 rounded-full shadow-sm"
+                style={{ backgroundColor: entry.color || entry.fill }}
+              />
+              <span className="text-slate-500 capitalize">{entry.name}:</span>
+              <span className="text-slate-800">{entry.value}</span>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -82,8 +90,8 @@ const renderPieLabel = (props: any) => {
 // Generate colors for pie chart based on campus count
 const generateColors = (count: number): string[] => {
   const colors = [
-    "#0C4A6E", "#155E75", "#0369A1", "#0284C7", "#38BDF8",
-    "#1E3A8A", "#1E40AF", "#2563EB", "#3B82F6", "#60A5FA"
+    "#0284C7", "#0EA5E9", "#38BDF8", "#7DD3FC", "#BAE6FD",
+    "#4F46E5", "#6366F1", "#818CF8", "#A5B4FC", "#C7D2FE"
   ];
   return colors.slice(0, count);
 };
@@ -108,7 +116,7 @@ export default function ChartsRow({ students }: ChartsRowProps) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
       date.setHours(0, 0, 0, 0);
-      
+
       const nextDate = new Date(date);
       nextDate.setDate(nextDate.getDate() + 1);
 
@@ -138,7 +146,7 @@ export default function ChartsRow({ students }: ChartsRowProps) {
       .slice(0, 5);
 
     const colors = generateColors(sortedCampuses.length);
-    
+
     const campusPieData: CampusPieData[] = sortedCampuses.map(([name, value], index) => ({
       name: name.length > 15 ? name.substring(0, 15) + '...' : name,
       value,
@@ -151,7 +159,7 @@ export default function ChartsRow({ students }: ChartsRowProps) {
         .sort((a, b) => b[1] - a[1])
         .slice(5)
         .reduce((sum, [, count]) => sum + count, 0);
-      
+
       if (otherCampuses > 0) {
         campusPieData.push({
           name: "Others",
@@ -168,11 +176,11 @@ export default function ChartsRow({ students }: ChartsRowProps) {
     if (weekData.length >= 2) {
       const totalLeaders = weekData.reduce((sum, day) => sum + day.mainLeaders, 0);
       const totalEvangelists = weekData.reduce((sum, day) => sum + day.evangelists, 0);
-      
+
       // Compare with previous week (estimate using 70% of current)
       const lastWeekLeaders = Math.max(1, Math.floor(totalLeaders * 0.7));
       const lastWeekEvangelists = Math.max(1, Math.floor(totalEvangelists * 0.7));
-      
+
       leadersGrowth = ((totalLeaders - lastWeekLeaders) / lastWeekLeaders) * 100;
       evangelistsGrowth = ((totalEvangelists - lastWeekEvangelists) / lastWeekEvangelists) * 100;
     }
@@ -190,11 +198,11 @@ export default function ChartsRow({ students }: ChartsRowProps) {
   if (students.length === 0) {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-          <p className="text-center text-sky-700/70 py-20">No data available</p>
+        <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white flex items-center justify-center min-h-[400px]">
+          <p className="text-center text-slate-400 font-medium">No data available for chart</p>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-          <p className="text-center text-sky-700/70 py-20">No data available</p>
+        <div className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white flex items-center justify-center min-h-[400px]">
+          <p className="text-center text-slate-400 font-medium">No distribution data available</p>
         </div>
       </div>
     );
@@ -204,10 +212,13 @@ export default function ChartsRow({ students }: ChartsRowProps) {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
       {/* Weekly Leaders vs Evangelists Chart */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500 relative overflow-hidden group"
       >
+        <div className="absolute top-0 right-0 w-64 h-64 bg-sky-50 rounded-full blur-3xl -z-10 bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-500 transform translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl -z-10 bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-500 transform -translate-x-1/2 translate-y-1/2" />
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-sky-900 to-sky-700 rounded-xl flex items-center justify-center">
@@ -233,52 +244,60 @@ export default function ChartsRow({ students }: ChartsRowProps) {
             <AreaChart data={weeklyData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="leadersGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0C4A6E" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#0C4A6E" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#0284C7" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#0284C7" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="evangelistsGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0284C7" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#0284C7" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#0EA5E9" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#0EA5E9" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis 
-                dataKey="day" 
-                stroke="#64748B"
-                tick={{ fill: '#64748B', fontSize: 12 }}
+              <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+              <XAxis
+                dataKey="day"
+                stroke="#94A3B8"
+                tick={{ fill: '#64748B', fontSize: 12, fontWeight: 500 }}
+                tickLine={false}
+                axisLine={false}
+                dy={10}
               />
-              <YAxis 
-                stroke="#64748B"
-                tick={{ fill: '#64748B', fontSize: 12 }}
+              <YAxis
+                stroke="#94A3B8"
+                tick={{ fill: '#64748B', fontSize: 12, fontWeight: 500 }}
+                tickLine={false}
+                axisLine={false}
+                dx={-10}
               />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend 
+              <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#E2E8F0', strokeWidth: 1, strokeDasharray: '3 3' }} />
+              <Legend
                 wrapperStyle={{ paddingTop: 20 }}
                 formatter={(value) => {
-                  if (value === "mainLeaders") return <span className="text-sky-900 text-sm font-medium">Main Leaders</span>;
-                  if (value === "evangelists") return <span className="text-sky-900 text-sm font-medium">Evangelism Mobilizers</span>;
-                  return <span className="text-sky-900 text-sm font-medium">{value}</span>;
+                  if (value === "mainLeaders") return <span className="text-slate-700 text-sm font-medium">Main Leaders</span>;
+                  if (value === "evangelists") return <span className="text-slate-700 text-sm font-medium">Evangelism Mobilizers</span>;
+                  return <span className="text-slate-700 text-sm font-medium">{value}</span>;
                 }}
               />
-              <Area 
-                type="monotone" 
-                dataKey="mainLeaders" 
-                stroke="#0C4A6E" 
-                strokeWidth={3}
-                fill="url(#leadersGradient)" 
+              <Area
+                type="monotone"
+                dataKey="mainLeaders"
+                stroke="#0284C7"
+                strokeWidth={4}
+                fill="url(#leadersGradient)"
                 name="mainLeaders"
-                dot={{ r: 4, fill: "#0C4A6E", strokeWidth: 2, stroke: "white" }}
-                activeDot={{ r: 6, fill: "#0C4A6E", strokeWidth: 2, stroke: "white" }}
-              />
-              <Area 
-                type="monotone" 
-                dataKey="evangelists" 
-                stroke="#0284C7" 
-                strokeWidth={3}
-                fill="url(#evangelistsGradient)" 
-                name="evangelists"
+                animationDuration={1500}
                 dot={{ r: 4, fill: "#0284C7", strokeWidth: 2, stroke: "white" }}
-                activeDot={{ r: 6, fill: "#0284C7", strokeWidth: 2, stroke: "white" }}
+                activeDot={{ r: 6, fill: "#0284C7", strokeWidth: 3, stroke: "white", style: { filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))' } }}
+              />
+              <Area
+                type="monotone"
+                dataKey="evangelists"
+                stroke="#0EA5E9"
+                strokeWidth={4}
+                fill="url(#evangelistsGradient)"
+                name="evangelists"
+                animationDuration={1500}
+                dot={{ r: 4, fill: "#0EA5E9", strokeWidth: 2, stroke: "white" }}
+                activeDot={{ r: 6, fill: "#0EA5E9", strokeWidth: 3, stroke: "white", style: { filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))' } }}
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -315,10 +334,13 @@ export default function ChartsRow({ students }: ChartsRowProps) {
 
       {/* Campus Distribution Chart */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+        className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500 relative overflow-hidden group"
       >
+        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full blur-3xl -z-10 bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-500 transform translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-sky-50 rounded-full blur-3xl -z-10 bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-500 transform -translate-x-1/2 translate-y-1/2" />
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-sky-900 to-sky-700 rounded-xl flex items-center justify-center">
@@ -349,8 +371,8 @@ export default function ChartsRow({ students }: ChartsRowProps) {
                 labelLine={{ stroke: '#0C4A6E', strokeWidth: 1 }}
               >
                 {campusData.map((entry, index) => (
-                  <Cell 
-                    key={`cell-${index}`} 
+                  <Cell
+                    key={`cell-${index}`}
                     fill={entry.color}
                     stroke="white"
                     strokeWidth={2}

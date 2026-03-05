@@ -44,27 +44,24 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-sky-50 to-white">
+    <div className="min-h-screen flex bg-slate-50 relative overflow-hidden">
+      {/* Ambient glowing orbs */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sky-300/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[40%] w-[30%] h-[30%] bg-sky-500/10 rounded-full blur-[100px] pointer-events-none" />
+
       {/* Left Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8">
-        <motion.div 
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8 relative z-10">
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-md w-full"
+          className="max-w-md w-full bg-white/70 backdrop-blur-2xl p-8 sm:p-10 rounded-[2.5rem] shadow-[0_8px_40px_rgb(0,0,0,0.06)] border border-white"
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", duration: 0.6 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-sky-900 to-sky-700 rounded-2xl mb-4 shadow-lg mx-auto"
-            >
-              <span className="text-white font-bold text-2xl">⛪</span>
-            </motion.div>
-            <h1 className="text-3xl font-bold text-sky-900 mb-2">Welcome Back</h1>
-            <p className="text-sky-700/70">Sign in to access your admin dashboard</p>
+
+            <h1 className="text-3xl font-extrabold text-slate-800 mb-2 tracking-tight">Welcome Back</h1>
+            <p className="text-slate-500 font-medium">Sign in to access your admin dashboard</p>
           </div>
 
           {/* Error Message */}
@@ -83,16 +80,16 @@ export default function AdminLogin() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email Field */}
             <div>
-              <label className="block text-sm font-medium text-sky-900 mb-1.5">
+              <label className="block text-sm font-bold tracking-wide text-slate-700 mb-2 uppercase">
                 Email Address
               </label>
               <div className="relative group">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sky-400 group-focus-within:text-sky-600 transition-colors w-5 h-5" />
+                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 group-focus-within:text-sky-700 transition-colors w-5 h-5" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white/60 focus:bg-white border border-sky-100/80 hover:border-sky-200 rounded-xl text-sm font-medium text-sky-950 placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-sky-900/10 focus:border-sky-700 transition-all"
                   placeholder="admin@example.com"
                   required
                   disabled={isLoading}
@@ -102,16 +99,16 @@ export default function AdminLogin() {
 
             {/* Password Field */}
             <div>
-              <label className="block text-sm font-medium text-sky-900 mb-1.5">
+              <label className="block text-sm font-bold tracking-wide text-slate-700 mb-2 uppercase">
                 Password
               </label>
               <div className="relative group">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sky-400 group-focus-within:text-sky-600 transition-colors w-5 h-5" />
+                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 group-focus-within:text-sky-700 transition-colors w-5 h-5" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-12 py-3 bg-white/60 focus:bg-white border border-sky-100/80 hover:border-sky-200 rounded-xl text-sm font-medium text-sky-950 placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm"
+                  className="w-full pl-12 pr-12 py-3.5 bg-slate-50/50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-sky-900/10 focus:border-sky-700 transition-all"
                   placeholder="••••••••"
                   required
                   disabled={isLoading}
@@ -119,37 +116,20 @@ export default function AdminLogin() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sky-400 hover:text-sky-600 transition-colors"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-sky-700 transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer group">
-                <input 
-                  type="checkbox" 
-                  className="w-4 h-4 rounded border-sky-300 text-sky-600 focus:ring-sky-500 focus:ring-offset-0 transition" 
-                />
-                <span className="text-sm text-sky-700 group-hover:text-sky-900 transition">Remember me</span>
-              </label>
-              <Link 
-                href="/admin/forgot-password" 
-                className="text-sm text-sky-600 hover:text-sky-700 font-medium transition"
-              >
-                Forgot Password?
-              </Link>
-            </div>
-
             {/* Login Button */}
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.01, y: -2 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-sky-900 to-sky-700 text-white py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+              className="mt-4 w-full bg-gradient-to-r from-sky-900 to-sky-700 text-white py-4 rounded-2xl font-bold shadow-[0_8px_20px_rgba(12,74,110,0.3)] hover:shadow-[0_12px_25px_rgba(12,74,110,0.4)] transition-all duration-300 flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -158,99 +138,78 @@ export default function AdminLogin() {
                 </>
               ) : (
                 <>
-                  <span>Sign In</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <span className="text-base tracking-wide uppercase">Sign In</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
                 </>
               )}
             </motion.button>
-
-            {/* Register Link */}
-            <p className="text-center text-sky-700/70 text-sm">
-              Don't have an account?{" "}
-              <Link href="/admin/signup" className="text-sky-600 hover:text-sky-700 font-semibold transition">
-                Register here
-              </Link>
-            </p>
           </form>
-
-          {/* Footer */}
-          <p className="text-xs text-sky-900/40 text-center mt-8">
-            By signing in, you agree to our{" "}
-            <Link href="/terms" className="text-sky-600 hover:text-sky-800 transition underline decoration-sky-600/30 underline-offset-2">Terms</Link>{" "}
-            and{" "}
-            <Link href="/privacy" className="text-sky-600 hover:text-sky-800 transition underline decoration-sky-600/30 underline-offset-2">Privacy Policy</Link>
-          </p>
         </motion.div>
       </div>
 
       {/* Right Side - Image with Dark Sky Gradient */}
-      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
+      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden m-4 rounded-[3rem]">
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ 
+        <div
+          className="absolute inset-0 bg-cover bg-center transform hover:scale-105 transition-transform duration-[20s] ease-out"
+          style={{
             backgroundImage: "url('/images/back5.JPG')"
           }}
         />
-        {/* Dark Sky Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-sky-900/95 via-sky-800/95 to-sky-900/95" />
-        
+        {/* Deep Dark Sky Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-950/95 via-slate-900/90 to-sky-900/95 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-transparent" />
+
         {/* Content */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative h-full flex flex-col items-center justify-center text-white p-12 text-center"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", delay: 0.4 }}
-            className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/20"
-          >
-            <span className="text-4xl">⛪</span>
-          </motion.div>
-          
-          <motion.h2 
+
+
+          <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-4xl font-bold mb-4"
+            className="text-4xl font-extrabold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70"
           >
-            Admin Dashboard
+            Easter EvangelisticOutreach
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
-            className="text-xl text-white/80 mb-8"
+            className="text-lg text-white/70 mb-10 max-w-sm font-medium leading-relaxed"
           >
-            Manage and monitor campus outreach data with powerful analytics and insights
+            EvaSUE and African Evangelistic Enterprise (AEE-Ethiopia) are teaming up for the "Jesus is All About Life" (JAAL)
           </motion.p>
-          
+
           {/* Feature List */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="space-y-4 text-left bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+            className="space-y-4 text-left bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl"
           >
             {[
               "Track outreach metrics across all campuses",
-              "Manage user access and permissions",
               "Generate detailed impact reports",
               "Real-time data visualization"
             ].map((feature, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.9 + index * 0.1 }}
-                className="flex items-center gap-3"
+                className="flex items-center gap-4"
               >
-                <div className="w-2 h-2 bg-sky-400 rounded-full" />
-                <span>{feature}</span>
+                <div className="flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-sky-600 to-sky-800 shadow-lg shadow-sky-900/30 shrink-0">
+                  <div className="w-1.5 h-1.5 bg-white rounded-full" />
+                </div>
+                <span className="font-medium text-white/90">{feature}</span>
               </motion.div>
             ))}
           </motion.div>

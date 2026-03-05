@@ -5,10 +5,10 @@ import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import StatCard from "@/components/dashboard/StatCard";
 import ChartsRow from "@/components/dashboard/ChartsRow";
 import Distributions from "@/components/dashboard/Distributions";
-import { 
-  Users, 
-  UserCog, 
-  Globe, 
+import {
+  Users,
+  UserCog,
+  Globe,
   GraduationCap,
   Download,
   Filter,
@@ -57,7 +57,7 @@ export default function Dashboard() {
       const data = await response.json();
       const studentsData = data.students || [];
       setStudents(studentsData);
-      
+
       // Calculate stats from real data
       calculateStats(studentsData);
     } catch (error) {
@@ -72,10 +72,10 @@ export default function Dashboard() {
     const totalMainLeaders = studentsData.filter(s => s.role === 'main-leader').length;
     const totalEvangelists = studentsData.filter(s => s.role === 'evangelism-mobilizer').length;
     const uniqueCampuses = new Set(studentsData.map(s => s.campus)).size;
-    
+
     // Recent registrations (last 24 hours)
     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const recentRegistrations = studentsData.filter(s => 
+    const recentRegistrations = studentsData.filter(s =>
       new Date(s.registeredAt) >= oneDayAgo
     ).length;
 
@@ -126,80 +126,71 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-sky-50 to-white">
+    <div className="flex h-screen bg-slate-50 relative overflow-hidden">
+      {/* Ambient background glows for the whole page */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-sky-200/30 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-200/30 rounded-full blur-[120px] pointer-events-none" />
+
       <DashboardSidebar />
-      
-      <main className="flex-1 overflow-y-auto">
+
+      <main className="flex-1 overflow-y-auto z-10">
         {/* Header */}
-        <header className="bg-white/80 backdrop-blur-md border-b border-sky-100 px-8 py-4 sticky top-0 z-10">
+        <header className="bg-white/60 backdrop-blur-xl border-b border-white/80 px-8 py-5 sticky top-0 z-20 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-sky-900">Dashboard Overview</h1>
-              <p className="text-sm text-sky-700/70 mt-1">
-                {loading ? "Loading data..." : 
+              <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 tracking-tight">Dashboard Overview</h1>
+              <p className="text-sm font-medium text-slate-500 mt-0.5">
+                {loading ? "Loading data..." :
                   `Based on ${stats.totalStudents} registered students across ${stats.totalCampuses} campuses`}
               </p>
             </div>
-            
+
             <div className="flex items-center gap-4">
               {/* Search */}
-              <div className="relative hidden md:block">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-sky-400 w-4 h-4" />
-                <input 
+              <div className="relative hidden md:block group">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 group-focus-within:text-indigo-500 transition-colors" />
+                <input
                   type="text"
                   placeholder="Search..."
-                  className="pl-10 pr-4 py-2 bg-sky-50/50 border border-sky-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-900 focus:border-transparent text-sm w-64"
+                  className="w-64 pl-11 pr-4 py-2.5 bg-slate-50/50 border border-slate-200 rounded-2xl text-sm font-medium text-slate-700 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
                 />
               </div>
-              
+
               {/* Actions */}
-              <button 
-                onClick={fetchData}
-                className="p-2 hover:bg-sky-50 rounded-lg transition text-sky-700"
-                disabled={loading}
-                title="Refresh data"
-              >
-                <RefreshCw size={20} className={loading ? "animate-spin" : ""} />
-              </button>
-              <button className="p-2 hover:bg-sky-50 rounded-lg transition relative">
-                <Bell size={20} className="text-sky-700" />
-                {stats.recentRegistrations > 0 && (
-                  <span className="absolute top-1 right-1 w-2 h-2 bg-sky-900 rounded-full" />
-                )}
-              </button>
-              <button className="p-2 hover:bg-sky-50 rounded-lg transition">
-                <Filter size={20} className="text-sky-700" />
-              </button>
-              <button className="p-2 hover:bg-sky-50 rounded-lg transition">
-                <Download size={20} className="text-sky-700" />
-              </button>
-              
-              {/* Profile */}
-              <div className="w-10 h-10 bg-gradient-to-r from-sky-900 to-sky-700 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
-                AD
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={fetchData}
+                  className="p-2.5 bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 rounded-xl transition-all text-slate-600 hover:text-indigo-600 disabled:opacity-50"
+                  disabled={loading}
+                  title="Refresh data"
+                >
+                  <RefreshCw size={18} strokeWidth={2.5} className={loading ? "animate-spin" : ""} />
+                </button>
+                <div className="h-8 w-px bg-slate-200 mx-1" /> {/* Divider */}
+
               </div>
             </div>
           </div>
 
           {/* Quick Stats Row */}
           {!loading && stats.totalStudents > 0 && (
-            <div className="flex items-center gap-6 mt-4 pt-4 border-t border-sky-100 text-sm">
-              <div className="flex items-center gap-2">
-                <Church className="w-4 h-4 text-sky-600" />
-                <span className="text-sky-700">
-                  <span className="font-semibold text-sky-900">{stats.totalStudents}</span> Total Students
+            <div className="flex items-center gap-8 mt-5 pt-4 border-t border-slate-100/50 text-sm">
+              <div className="flex items-center gap-2.5">
+                <div className="w-6 h-6 rounded-md bg-indigo-50 flex items-center justify-center"><Church className="w-3.5 h-3.5 text-indigo-600" /></div>
+                <span className="text-slate-500 font-medium">
+                  <span className="font-bold text-slate-800 mr-1">{stats.totalStudents}</span> Total Students
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <UserCog className="w-4 h-4 text-sky-600" />
-                <span className="text-sky-700">
-                  <span className="font-semibold text-sky-900">{stats.totalMainLeaders}</span> Main Leaders
+              <div className="flex items-center gap-2.5">
+                <div className="w-6 h-6 rounded-md bg-purple-50 flex items-center justify-center"><UserCog className="w-3.5 h-3.5 text-purple-600" /></div>
+                <span className="text-slate-500 font-medium">
+                  <span className="font-bold text-slate-800 mr-1">{stats.totalMainLeaders}</span> Main Leaders
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-sky-600" />
-                <span className="text-sky-700">
-                  <span className="font-semibold text-sky-900">{stats.totalEvangelists}</span> Evangelists
+              <div className="flex items-center gap-2.5">
+                <div className="w-6 h-6 rounded-md bg-sky-50 flex items-center justify-center"><Globe className="w-3.5 h-3.5 text-sky-600" /></div>
+                <span className="text-slate-500 font-medium">
+                  <span className="font-bold text-slate-800 mr-1">{stats.totalEvangelists}</span> Evangelists
                 </span>
               </div>
             </div>
@@ -212,13 +203,13 @@ export default function Dashboard() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 animate-pulse">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-14 h-14 bg-sky-200 rounded-xl" />
-                    <div className="w-16 h-6 bg-sky-100 rounded-full" />
+                <div key={i} className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white animate-pulse">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-14 h-14 bg-slate-100 rounded-2xl" />
+                    <div className="w-16 h-6 bg-slate-50 rounded-full" />
                   </div>
-                  <div className="h-8 w-20 bg-sky-200 rounded mb-2" />
-                  <div className="h-4 w-24 bg-sky-100 rounded" />
+                  <div className="h-10 w-24 bg-slate-100 rounded-lg mb-2" />
+                  <div className="h-4 w-32 bg-slate-50 rounded" />
                 </div>
               ))}
             </div>
