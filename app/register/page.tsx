@@ -224,34 +224,10 @@ export default function StudentRegister() {
       <div className="fixed bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Language Toggle Button */}
-      <motion.button
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        onClick={toggleLanguage}
-        className="fixed top-4 right-4 sm:top-8 sm:right-8 z-50 px-4 py-2 bg-slate-900/40 hover:bg-slate-800/60 backdrop-blur-xl border border-sky-400/20 hover:border-sky-400/40 rounded-full text-sm font-medium text-white transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-sky-500/10"
-      >
-        <span className="text-lg">{language === 'en' ? '🇺🇸' : '🇪🇹'}</span>
-        <span className="font-bold tracking-wide">{language === 'en' ? 'አማርኛ' : 'English'}</span>
-      </motion.button>
+
 
       {/* Back Button */}
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="fixed top-4 left-4 sm:top-8 sm:left-8 z-50 pt-safe"
-      >
-        <Link
-          href="/"
-          className="group flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-slate-900/40 hover:bg-slate-800/60 backdrop-blur-xl border border-sky-400/20 hover:border-sky-400/40 rounded-full text-white transition-all duration-300 shadow-lg hover:shadow-sky-500/10"
-        >
-          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-bold tracking-wide hidden sm:block">
-            {language === 'en' ? 'Home' : 'መነሻ'}
-          </span>
-        </Link>
-      </motion.div>
+
 
       {/* Hero Header Section within Register */}
       <div className="relative w-full z-10 mx-auto mt-20 sm:mt-24 mb-10 text-center px-4 max-w-2xl">

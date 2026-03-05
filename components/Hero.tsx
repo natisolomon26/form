@@ -84,7 +84,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       subtitle: "ኢየሱስ ለጥያቄ ሁሉ መልስ ነው • JAAL",
       question: "የወንጌል ጥሪ ለአዲስ አበባ ካምፓሶች! 🇪🇹✨",
       description: "ኢቫሱ (EvaSUE) ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE) ጋር በመተባበር \"ኢየሱስ ለጥያቄ ሁሉ መልስ ነው\" (JAAL) በሚል መሪ ቃል ታላቅ የትንሳኤ ወንጌል ዘመቻ አዘጋጅቷል።",
-      training: "ለዚህ ታላቅ ተልዕኮ ራሳችንን የምናዘጋጅበት የሙሉ ቀን ሥልጠና መጋቢት 07 ቀን 2026 ይጠብቀናል!",
+      training: "መጋቢት 05 ቀን 2018 ዓ.ም. ለዋና መሪዎች እና ለወንጌል አስተባባሪዎች የተዘጋጀ፥ ለዚህ ታላቅ ተልዕኮ ራሳችንን የምናዘጋጅበት የሙሉ ቀን ሥልጠና ይጠብቀናል!",
       locations: [
         { name: "ለሴንትራል 1 ተማሪዎች", location: "መገናኛ ሙሉ ወንጌል ቤተክርስቲያን" },
         { name: "ለሴንትራል 2 ተማሪዎች", location: "ልደታ የእግዚአብሔር አምባ ቤተክርስቲያን" }
@@ -187,26 +187,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         </div>
       )}
 
-      {/* Language Toggle & Admin Login */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5, type: "spring" }}
-        className="absolute top-6 right-6 z-50 flex items-center gap-3"
-      >
-        <button
-          onClick={toggleLanguage}
-          className="group relative flex items-center gap-2.5 px-5 py-2.5 overflow-hidden rounded-full transition-all duration-300 shadow-lg hover:shadow-sky-500/20"
-        >
-          <div className="absolute inset-0 bg-white/10 backdrop-blur-xl border border-white/20 group-hover:bg-white/15 transition-colors" />
-          <div className="absolute inset-0 bg-gradient-to-r from-sky-500/0 via-sky-400/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-          <Globe className="w-4 h-4 text-sky-300 relative z-10" />
-          <span className="text-xs sm:text-sm font-bold text-white relative z-10 tracking-widest uppercase">
-            {language === 'en' ? 'አማርኛ' : 'English'}
-          </span>
-        </button>
 
-      </motion.div>
 
       {/* Main Content - Scrollable Area */}
       <div className="relative z-10 w-full h-full overflow-y-auto py-16 sm:py-20 md:py-24">
@@ -263,7 +244,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
               <div className="relative group bg-slate-900/40 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-sky-400/20 shadow-2xl hover:border-sky-400/40 transition-all duration-500 overflow-hidden">
                 <div className="absolute top-0 right-0 p-32 bg-sky-500/10 blur-[100px] rounded-full pointer-events-none group-hover:bg-sky-500/20 transition-colors duration-700" />
                 <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-sky-500/30">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-sky-500/30">
                     <Calendar className="w-7 h-7 text-white" />
                   </div>
                   <div className="text-center sm:text-left">
@@ -341,7 +322,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative flex items-center justify-center gap-3 px-10 py-5 bg-white text-slate-950 font-black text-lg rounded-full overflow-hidden shadow-2xl transition-all"
+                  className="relative flex items-center justify-center gap-3 px-10 py-3.5 bg-white text-slate-950 font-black text-lg rounded-full overflow-hidden shadow-2xl transition-all"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative z-10 tracking-widest uppercase">{t.cta}</span>
