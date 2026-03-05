@@ -4,14 +4,19 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "EvaSUE",
+  title: "EEO",
   description: "Measuring Gospel Impact Across Ethiopian Campuses",
+  icons: {
+    icon: '/logo.svg',
+    shortcut: '/logo.svg',
+    apple: '/logo.svg',
+  },
 };
 
 export default function RootLayout({
