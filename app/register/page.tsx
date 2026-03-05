@@ -57,17 +57,17 @@ export default function StudentRegister() {
 
   // Bible verses in both languages
   const bibleVerses = [
-    { 
-      verse: language === 'en' ? "Go therefore and make disciples of all nations" : "እንግዲህ ሂዱና አሕዛብን ሁሉ ደቀ መዛሙርት አድርጉ", 
-      reference: language === 'en' ? "Matthew 28:19" : "ማቴዎስ 28:19" 
+    {
+      verse: language === 'en' ? "Go therefore and make disciples of all nations" : "እንግዲህ ሂዱና አሕዛብን ሁሉ ደቀ መዛሙርት አድርጉ",
+      reference: language === 'en' ? "Matthew 28:19" : "ማቴዎስ 28:19"
     },
-    { 
-      verse: language === 'en' ? "How beautiful are the feet of those who bring good news" : "የሚያስተምሩ እግሮች እንዴት ያማሩ ናቸው", 
-      reference: language === 'en' ? "Romans 10:15" : "ሮሜ 10:15" 
+    {
+      verse: language === 'en' ? "How beautiful are the feet of those who bring good news" : "የሚያስተምሩ እግሮች እንዴት ያማሩ ናቸው",
+      reference: language === 'en' ? "Romans 10:15" : "ሮሜ 10:15"
     },
-    { 
-      verse: language === 'en' ? "You will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth" : "ነገር ግን መንፈስ ቅዱስ በእናንተ ላይ በወረደ ጊዜ ኃይልን ትቀበላላችሁ፥ በኢየሩሳሌምም በይሁዳም ሁሉ በሰማርያም እስከ ምድር ዳርም ድረስ ምስክሮቼ ትሆናላችሁ", 
-      reference: language === 'en' ? "Acts 1:8" : "ሐዋርያት ሥራ 1:8" 
+    {
+      verse: language === 'en' ? "You will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth" : "ነገር ግን መንፈስ ቅዱስ በእናንተ ላይ በወረደ ጊዜ ኃይልን ትቀበላላችሁ፥ በኢየሩሳሌምም በይሁዳም ሁሉ በሰማርያም እስከ ምድር ዳርም ድረስ ምስክሮቼ ትሆናላችሁ",
+      reference: language === 'en' ? "Acts 1:8" : "ሐዋርያት ሥራ 1:8"
     }
   ];
 
@@ -128,59 +128,65 @@ export default function StudentRegister() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] relative overflow-hidden flex flex-col justify-center items-center py-10 px-4 sm:px-6">
-        {/* Background Decorative Blobs */}
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-sky-200/50 rounded-full mix-blend-multiply filter blur-[100px] opacity-70" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-200/50 rounded-full mix-blend-multiply filter blur-[100px] opacity-70" />
+      <div className="min-h-screen bg-slate-950 relative overflow-hidden flex flex-col justify-center items-center py-10 px-4 sm:px-6">
+        {/* Modern High-End Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-sky-950/40 to-slate-950 opacity-100 z-0" />
+        <motion.div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.15)_0%,transparent_60%)] z-0 pointer-events-none"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.9, 0.6] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sky-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[120px]" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] shadow-[0_20px_40px_rgb(0,0,0,0.06)] border border-white p-8 sm:p-10 w-full max-w-sm relative z-10 text-center"
+          className="bg-slate-900/50 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl shadow-sky-900/20 border border-sky-400/20 p-8 sm:p-10 w-full max-w-sm relative z-10 text-center"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", delay: 0.2, stiffness: 200, damping: 20 }}
-            className="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-emerald-500/20 transform rotate-3"
+            className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(16,185,129,0.4)] transform rotate-3"
           >
             <CheckCircle className="w-10 h-10 text-white" />
           </motion.div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-sky-950 mb-2 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">
             {language === 'en' ? "You're All Set!" : "ተመዝግበዋል!"}
           </h2>
-          <p className="text-sky-700/80 text-sm font-medium mb-8">
-            {language === 'en' ? 'Thank you for stepping up,' : 'እንኳን በደህና ተመዘገቡ,'} <span className="text-sky-900 font-bold">{formData.fullName.split(' ')[0]}</span>
+          <p className="text-sky-200/80 text-sm font-medium mb-8">
+            {language === 'en' ? 'Thank you for stepping up,' : 'እንኳን በደህና ተመዘገቡ,'} <span className="text-sky-300 font-bold">{formData.fullName.split(' ')[0]}</span>
           </p>
 
-          <div className="bg-sky-50/80 rounded-[2rem] p-6 mb-8 text-left border border-sky-100/50">
-            <p className="text-[11px] text-sky-900/50 font-bold mb-5 uppercase tracking-widest text-center">
+          <div className="bg-sky-500/10 rounded-[2rem] p-6 mb-8 text-left border border-sky-400/10 backdrop-blur-md">
+            <p className="text-[11px] text-sky-300/60 font-bold mb-5 uppercase tracking-widest text-center">
               {language === 'en' ? 'Registration Details' : 'የምዝገባ ዝርዝሮች'}
             </p>
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shadow-sm text-sky-600 border border-sky-50">
+              <div className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-2xl bg-sky-500/20 flex items-center justify-center shadow-sm text-sky-400 border border-sky-400/20 group-hover:bg-sky-400/30 transition-colors">
                   <Briefcase className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-semibold text-sky-500 uppercase tracking-wider mb-0.5">
+                  <p className="text-[10px] font-semibold text-sky-400/80 uppercase tracking-wider mb-0.5">
                     {language === 'en' ? 'Role' : 'ሚና'}
                   </p>
-                  <p className="text-sm font-bold text-sky-950">{roles.find(r => r.value === formData.role)?.label}</p>
+                  <p className="text-sm font-bold text-white">{roles.find(r => r.value === formData.role)?.label}</p>
                 </div>
               </div>
-              <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-200/50 to-transparent" />
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shadow-sm text-sky-600 border border-sky-50">
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-500/30 to-transparent" />
+              <div className="flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-2xl bg-sky-500/20 flex items-center justify-center shadow-sm text-sky-400 border border-sky-400/20 group-hover:bg-sky-400/30 transition-colors">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-semibold text-sky-500 uppercase tracking-wider mb-0.5">
+                  <p className="text-[10px] font-semibold text-sky-400/80 uppercase tracking-wider mb-0.5">
                     {language === 'en' ? 'Campus' : 'ካምፓስ'}
                   </p>
-                  <p className="text-sm font-bold text-sky-950">{formData.campus}</p>
+                  <p className="text-sm font-bold text-white">{formData.campus}</p>
                 </div>
               </div>
             </div>
@@ -194,9 +200,9 @@ export default function StudentRegister() {
 
           <Link
             href="/"
-            className="group relative inline-flex items-center justify-center w-full gap-2 px-6 py-4 bg-gradient-to-r from-sky-900 to-sky-700 text-white rounded-2xl font-bold text-sm shadow-xl shadow-sky-900/20 hover:shadow-sky-900/40 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+            className="group relative inline-flex items-center justify-center w-full gap-2 px-6 py-4 bg-white text-slate-900 rounded-2xl font-black text-sm shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
           >
-            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
             <span className="relative z-10">{language === 'en' ? 'Return Home' : 'ወደ መነሻ ተመለስ'}</span>
             <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -206,11 +212,16 @@ export default function StudentRegister() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] relative overflow-hidden px-4 py-8 sm:py-12 flex flex-col items-center selection:bg-sky-200 selection:text-sky-900">
-      {/* Abstract Background Shapes */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-sky-200/40 rounded-full mix-blend-multiply filter blur-[120px] opacity-70" />
-      <div className="absolute top-[20%] right-[-10%] w-[45%] h-[45%] bg-sky-300/30 rounded-full mix-blend-multiply filter blur-[120px] opacity-60" />
-      <div className="absolute bottom-[-10%] left-[20%] w-[40%] h-[40%] bg-blue-200/40 rounded-full mix-blend-multiply filter blur-[120px] opacity-60" />
+    <div className="min-h-screen bg-slate-950 relative overflow-hidden flex flex-col items-center selection:bg-sky-500/30 selection:text-white pb-12">
+      {/* Modern High-End Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-sky-950/40 to-slate-950 opacity-100 z-0" />
+      <motion.div
+        className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.15)_0%,transparent_60%)] z-0 pointer-events-none"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.9, 0.6] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div className="fixed top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="fixed bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Language Toggle Button */}
       <motion.button
@@ -218,10 +229,10 @@ export default function StudentRegister() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         onClick={toggleLanguage}
-        className="absolute top-4 right-4 sm:top-8 sm:right-8 z-50 px-3 py-1.5 bg-white/40 hover:bg-white/80 backdrop-blur-xl border border-white/50 hover:border-sky-200 rounded-full text-sm font-medium text-sky-900 transition-all duration-300 flex items-center gap-2"
+        className="fixed top-4 right-4 sm:top-8 sm:right-8 z-50 px-4 py-2 bg-slate-900/40 hover:bg-slate-800/60 backdrop-blur-xl border border-sky-400/20 hover:border-sky-400/40 rounded-full text-sm font-medium text-white transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-sky-500/10"
       >
         <span className="text-lg">{language === 'en' ? '🇺🇸' : '🇪🇹'}</span>
-        <span>{language === 'en' ? 'አማርኛ' : 'English'}</span>
+        <span className="font-bold tracking-wide">{language === 'en' ? 'አማርኛ' : 'English'}</span>
       </motion.button>
 
       {/* Back Button */}
@@ -229,55 +240,71 @@ export default function StudentRegister() {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="absolute top-4 left-4 sm:top-8 sm:left-8 z-50 pt-safe"
+        className="fixed top-4 left-4 sm:top-8 sm:left-8 z-50 pt-safe"
       >
         <Link
           href="/"
-          className="group flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-white/40 hover:bg-white/80 backdrop-blur-xl border border-white/50 hover:border-sky-200 shadow-sm hover:shadow-md rounded-full transition-all duration-300"
+          className="group flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 bg-slate-900/40 hover:bg-slate-800/60 backdrop-blur-xl border border-sky-400/20 hover:border-sky-400/40 rounded-full text-white transition-all duration-300 shadow-lg hover:shadow-sky-500/10"
         >
-          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-sky-800 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-bold text-sky-900 hidden sm:block">
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-sky-400 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-sm font-bold tracking-wide hidden sm:block">
             {language === 'en' ? 'Home' : 'መነሻ'}
           </span>
         </Link>
       </motion.div>
 
-      {/* Main Container - Centered Form Only */}
-      <div className="relative w-full max-w-md z-10 mx-auto mt-16 sm:mt-20">
-        {/* Header Section */}
+      {/* Hero Header Section within Register */}
+      <div className="relative w-full z-10 mx-auto mt-20 sm:mt-24 mb-10 text-center px-4 max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-sky-500/10 border border-sky-400/20 rounded-full mb-6">
+            <Globe className="w-3.5 h-3.5 text-sky-400 animate-pulse" />
+            <span className="text-xs font-bold text-sky-300 uppercase tracking-widest">{language === 'en' ? "Join the Mission" : "ተልዕኮውን ይቀላቀሉ"}</span>
+          </div>
 
+
+        </motion.div>
+      </div>
+
+      {/* Main Container - Centered Form Only */}
+      <div className="relative w-full max-w-md z-10 mx-auto w-full px-4 sm:px-0">
         {/* Form Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-          className="bg-white/70 backdrop-blur-xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-[2rem] p-5 sm:p-8"
+          className="bg-slate-900/60 backdrop-blur-2xl border border-sky-400/20 shadow-[0_0_40px_rgba(14,165,233,0.1)] rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group"
         >
+          <div className="absolute top-0 right-0 p-32 bg-sky-500/5 blur-[100px] rounded-full pointer-events-none group-hover:bg-sky-500/10 transition-colors duration-1000" />
+
           {/* Daily Verse */}
-          
+
 
           {/* Error Message */}
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-4 bg-red-50/80 backdrop-blur-sm border border-red-200 rounded-2xl p-3 flex items-start gap-2"
+              className="mb-6 bg-red-500/10 backdrop-blur-sm border border-red-500/30 rounded-2xl p-4 flex items-start gap-3"
             >
-              <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-              <p className="text-xs text-red-600 font-medium">{error}</p>
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-red-200 font-medium leading-relaxed">{error}</p>
             </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
             <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-5">
 
               {/* Full Name */}
-              <motion.div variants={itemVariants} className="space-y-1.5">
-                <label className="text-[13px] font-bold text-sky-950 ml-1">
-                  {language === 'en' ? 'Full Name' : 'ሙሉ ስም'} <span className="text-red-400">*</span>
+              <motion.div variants={itemVariants} className="space-y-2">
+                <label className="text-[12px] font-bold text-sky-200 uppercase tracking-widest ml-1">
+                  {language === 'en' ? 'Full Name' : 'ሙሉ ስም'} <span className="text-sky-400">*</span>
                 </label>
                 <div className="relative group/input">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400 group-focus-within/input:text-sky-600 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-500 group-focus-within/input:text-sky-300 transition-colors">
                     <User className="w-5 h-5" />
                   </div>
                   <input
@@ -286,19 +313,19 @@ export default function StudentRegister() {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full pl-11 pr-4 py-3.5 bg-white/60 focus:bg-white border border-sky-100/80 hover:border-sky-200 rounded-2xl text-sm font-medium text-sky-950 placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-900/50 focus:bg-slate-800/80 border border-sky-400/20 hover:border-sky-400/40 rounded-2xl text-sm font-medium text-white placeholder-sky-200/30 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all shadow-inner"
                     placeholder={language === 'en' ? 'Enter your full name' : 'ሙሉ ስምዎን ያስገቡ'}
                   />
                 </div>
               </motion.div>
 
               {/* Phone Number */}
-              <motion.div variants={itemVariants} className="space-y-1.5">
-                <label className="text-[13px] font-bold text-sky-950 ml-1">
-                  {language === 'en' ? 'Phone Number' : 'ስልክ ቁጥር'} <span className="text-red-400">*</span>
+              <motion.div variants={itemVariants} className="space-y-2">
+                <label className="text-[12px] font-bold text-sky-200 uppercase tracking-widest ml-1">
+                  {language === 'en' ? 'Phone Number' : 'ስልክ ቁጥር'} <span className="text-sky-400">*</span>
                 </label>
                 <div className="relative group/input">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400 group-focus-within/input:text-sky-600 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-500 group-focus-within/input:text-sky-300 transition-colors">
                     <Phone className="w-5 h-5" />
                   </div>
                   <input
@@ -307,19 +334,19 @@ export default function StudentRegister() {
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     required
-                    className="w-full pl-11 pr-4 py-3.5 bg-white/60 focus:bg-white border border-sky-100/80 hover:border-sky-200 rounded-2xl text-sm font-medium text-sky-950 placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-900/50 focus:bg-slate-800/80 border border-sky-400/20 hover:border-sky-400/40 rounded-2xl text-sm font-medium text-white placeholder-sky-200/30 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all shadow-inner"
                     placeholder="+251 91 234 5678"
                   />
                 </div>
               </motion.div>
 
               {/* Campus */}
-              <motion.div variants={itemVariants} className="space-y-1.5">
-                <label className="text-[13px] font-bold text-sky-950 ml-1">
-                  {language === 'en' ? 'Campus' : 'ካምፓስ / ግቢ'} <span className="text-red-400">*</span>
+              <motion.div variants={itemVariants} className="space-y-2">
+                <label className="text-[12px] font-bold text-sky-200 uppercase tracking-widest ml-1">
+                  {language === 'en' ? 'Campus' : 'ካምፓስ / ግቢ'} <span className="text-sky-400">*</span>
                 </label>
                 <div className="relative group/input">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400 group-focus-within/input:text-sky-600 transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-500 group-focus-within/input:text-sky-300 transition-colors">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <input
@@ -329,18 +356,18 @@ export default function StudentRegister() {
                     onChange={handleChange}
                     required
                     placeholder={language === 'en' ? 'e.g., Addis Ababa University' : 'ለምሳሌ፡ አዲስ አበባ ዩኒቨርሲቲ'}
-                    className="w-full pl-11 pr-4 py-3.5 bg-white/60 focus:bg-white border border-sky-100/80 hover:border-sky-200 rounded-2xl text-sm font-medium text-sky-950 placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-900/50 focus:bg-slate-800/80 border border-sky-400/20 hover:border-sky-400/40 rounded-2xl text-sm font-medium text-white placeholder-sky-200/30 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all shadow-inner"
                   />
                 </div>
               </motion.div>
 
               {/* Role */}
-              <motion.div variants={itemVariants} className="space-y-1.5">
-                <label className="text-[13px] font-bold text-sky-950 ml-1">
-                  {language === 'en' ? 'Role in Fellowship' : 'በህብረቱ ውስጥ ያለዎት አገልግሎት'} <span className="text-red-400">*</span>
+              <motion.div variants={itemVariants} className="space-y-2">
+                <label className="text-[12px] font-bold text-sky-200 uppercase tracking-widest ml-1">
+                  {language === 'en' ? 'Role in Fellowship' : 'በህብረቱ ውስጥ ያለዎት አገልግሎት'} <span className="text-sky-400">*</span>
                 </label>
                 <div className="relative group/input">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-400 group-focus-within/input:text-sky-600 transition-colors z-10">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-500 group-focus-within/input:text-sky-300 transition-colors z-10">
                     <Briefcase className="w-5 h-5" />
                   </div>
                   <select
@@ -348,16 +375,16 @@ export default function StudentRegister() {
                     value={formData.role}
                     onChange={handleChange}
                     required
-                    className={`w-full pl-11 pr-10 py-3.5 bg-white/60 focus:bg-white border border-sky-100/80 hover:border-sky-200 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-all shadow-sm appearance-none cursor-pointer ${formData.role ? 'text-sky-950' : 'text-sky-300'}`}
+                    className={`w-full pl-12 pr-10 py-4 bg-slate-900/50 focus:bg-slate-800/80 border border-sky-400/20 hover:border-sky-400/40 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-400 transition-all shadow-inner appearance-none cursor-pointer ${formData.role ? 'text-white' : 'text-sky-200/30'}`}
                   >
-                    <option value="" disabled>
+                    <option value="" disabled className="bg-slate-900 text-sky-200/50">
                       {language === 'en' ? 'Select your role' : 'ሚናዎን ይምረጡ'}
                     </option>
                     {roles.map(role => (
-                      <option key={role.value} value={role.value} className="text-sky-950">{role.label}</option>
+                      <option key={role.value} value={role.value} className="bg-slate-900 text-white py-2">{role.label}</option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-sky-400">
+                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-sky-500">
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </div>
@@ -370,11 +397,11 @@ export default function StudentRegister() {
                       exit={{ opacity: 0, height: 0, y: -5 }}
                       className="overflow-hidden"
                     >
-                      <div className="mt-3 bg-gradient-to-r from-sky-50/80 to-white border border-sky-100/50 rounded-2xl p-3.5">
-                        <p className="text-[12px] text-sky-800 font-medium leading-relaxed flex items-start gap-2">
-                          <span className="text-sky-500 mt-0.5">✨</span>
+                      <div className="mt-3 bg-sky-500/10 border border-sky-400/20 rounded-xl p-4 backdrop-blur-sm">
+                        <p className="text-[12px] text-sky-200 font-medium leading-relaxed flex items-start gap-2">
+                          <span className="text-sky-400 mt-0.5">✨</span>
                           <span>
-                            {formData.role === "main-leader" && (language === 'en' 
+                            {formData.role === "main-leader" && (language === 'en'
                               ? "Lead and coordinate fellowship activities across campus, guiding other members."
                               : "በካምፓስ ውስጥ የህብረት እንቅስቃሴዎችን መምራት እና ማስተባበር፣ ሌሎች አባላትን መምራት")}
                             {formData.role === "evangelism-mobilizer" && (language === 'en'
@@ -393,36 +420,36 @@ export default function StudentRegister() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="pt-2"
+              className="pt-4"
             >
               <motion.button
                 type="submit"
                 disabled={isLoading}
                 whileTap={{ scale: 0.98 }}
-                className="w-full relative group overflow-hidden bg-gradient-to-r from-sky-900 to-sky-700 text-white py-4 rounded-2xl font-bold text-[15px] shadow-xl shadow-sky-900/15 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full relative group overflow-hidden bg-white text-slate-950 py-4 rounded-2xl font-black text-[15px] shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+                <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                 {isLoading ? (
                   <>
-                    <div className="w-5 h-5 border-[2.5px] border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-[2.5px] border-slate-900/30 border-t-slate-900 rounded-full animate-spin" />
                     <span className="relative z-10">{language === 'en' ? 'Registering...' : 'በመመዝገብ ላይ...'}</span>
                   </>
                 ) : (
                   <>
-                    <span className="relative z-10">{language === 'en' ? 'Complete Registration' : 'ምዝገባን ያጠናቅቁ'}</span>
-                    <Send size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                    <span className="relative z-10 tracking-wide uppercase">{language === 'en' ? 'Complete Registration' : 'ምዝገባን ያጠናቅቁ'}</span>
+                    <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </>
                 )}
               </motion.button>
 
               {/* Privacy Note */}
-              <p className="text-[11px] text-center text-sky-900/40 font-medium mt-5 leading-relaxed max-w-[250px] mx-auto">
+              <p className="text-[11px] text-center text-sky-200/40 font-medium mt-6 leading-relaxed max-w-[250px] mx-auto">
                 {language === 'en' ? 'By registering, you agree to our' : 'በመመዝገብዎ፣ የኛን'}{" "}
-                <Link href="/terms" className="text-sky-600 hover:text-sky-800 transition-colors underline decoration-sky-600/30 underline-offset-2">
+                <Link href="/terms" className="text-sky-400 hover:text-sky-300 transition-colors underline decoration-sky-400/30 underline-offset-2">
                   {language === 'en' ? 'Terms' : 'ውሎች'}
                 </Link>
                 {" "}{language === 'en' ? 'and' : 'እና'}{" "}
-                <Link href="/privacy" className="text-sky-600 hover:text-sky-800 transition-colors underline decoration-sky-600/30 underline-offset-2">
+                <Link href="/privacy" className="text-sky-400 hover:text-sky-300 transition-colors underline decoration-sky-400/30 underline-offset-2">
                   {language === 'en' ? 'Privacy Policy' : 'የግላዊነት ፖሊሲ'}
                 </Link>
               </p>
