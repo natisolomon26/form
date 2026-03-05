@@ -62,7 +62,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         line2: "Outreach"
       },
       subtitle: "Jesus Is All About Life • JAAL",
-      question: "Are you ready to see lives transformed in Addis Ababa? 🇪🇹✨",
+      question: "Are you ready to see lives transformed in Addis Ababa?",
       description: "EvaSUE and African Evangelistic Enterprise (AEE-Ethiopia) are teaming up for the \"Jesus is All About Life\" (JAAL) Easter Outreach this April! Our goal is simple: Reach every campus and beyond with the hope of the Gospel.",
       training: "To get mission-ready, we are hosting a Full Day Training & Consultation on Mar 14, 2026, exclusively for Main Leaders and Evan & Mission Mobilizers Leaders.",
       locations: [
@@ -82,7 +82,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
         line2: "የወንጌል ስርጭት"
       },
       subtitle: "ኢየሱስ ለጥያቄ ሁሉ መልስ ነው • JAAL",
-      question: "የወንጌል ጥሪ ለአዲስ አበባ ካምፓሶች! 🇪🇹✨",
+      question: "የወንጌል ጥሪ ለአዲስ አበባ ካምፓሶች!",
       description: "ኢቫሱ (EvaSUE) ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE) ጋር በመተባበር \"ኢየሱስ ለጥያቄ ሁሉ መልስ ነው\" (JAAL) በሚል መሪ ቃል ታላቅ የትንሳኤ ወንጌል ዘመቻ አዘጋጅቷል።",
       training: "መጋቢት 05 ቀን 2018 ዓ.ም. ለዋና መሪዎች እና ለወንጌል አስተባባሪዎች የተዘጋጀ፥ ለዚህ ታላቅ ተልዕኮ ራሳችንን የምናዘጋጅበት የሙሉ ቀን ሥልጠና ይጠብቀናል!",
       locations: [
