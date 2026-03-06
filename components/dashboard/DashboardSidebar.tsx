@@ -25,8 +25,7 @@ export default function DashboardSidebar() {
 
   const menuItems = [
     { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-    { icon: Users, label: "Registrants", href: "/dashboard/students" },
-    { icon: FormInput, label: "Forms", href: "/dashboard/form" },
+    { icon: Users, label: "Registrants", href: "/dashboard/students" }
   ];
 
   const isActive = (href: string) => {
