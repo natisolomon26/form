@@ -19,10 +19,10 @@ export default function ContentPage() {
 
     const content = {
         en: {
-            title: "Easter Outreach & Campus Impact",
+            title: "Easter EvangelisticOutreach",
             subtitle: "Jesus Is All About Life (JAAL)",
-            articleTitle: "The Vision for Campus Transformation",
-            articleContent1: "At EvaSUE, our mission has always been to see every student in Ethiopian campuses transformed by the power of the Gospel. As we approach the Easter season, we are embarking on a massive initiative titled 'Jesus Is All About Life' (JAAL) in partnership with African Evangelistic Enterprise (AEE-Ethiopia).",
+            articleTitle: "ተስፈኛው ባለ ርስት",
+            articleContent1: "ጴጥሮስ በመጀመሪያ መልእክቱ አጥብቆ የሚናገረው ስለ ሕያው ተስፋ ነው። ይህ ተስፋ የዘላለም ሕይወት ተስፋ ነው፤ ምክንያቱም ኢየሱስ ክርስቶስ ሞቶ አልቀረም፤ አሁን ሕያው ነው።",
             articleContent2: "This outreach isn't just about sharing a message; it's about building a movement of disciples who understand their identity in Christ and their calling to influence society. We believe that when a student's life is changed, the future of our nation is impacted.",
             articleContent3: "Watch the video to learn more about our training programs, mobilization strategies, and how you can be part of this life-changing mission.",
             videoTitle: "Watch Our Mission Documentary",
@@ -32,7 +32,7 @@ export default function ContentPage() {
             back: "Back to Home"
         },
         am: {
-            title: "የትንሳኤ የወንጌል ዘመቻ እና የካምፓስ ተፅእኖ",
+            title: "የፋሲካ የወንጌል ስርጭት",
             subtitle: "ኢየሱስ ለጥያቄ ሁሉ መልስ ነው (JAAL)",
             articleTitle: "ለካምፓስ ለውጥ ያለን ራዕይ",
             articleContent1: "በኢቫሱ ሁልጊዜም ግባችን በኢትዮጵያ ካምፓሶች ውስጥ የሚገኙ ተማሪዎች በሙሉ በወንጌል ኃይል ተለውጠው ማየት ነው። የትንሳኤን በዓል አስመልክቶ ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE-Ethiopia) ጋር በመተባበር 'ኢየሱስ ለጥያቄ ሁሉ መልስ ነው' (JAAL) የተሰኘ ታላቅ ዘመቻ ጀምረናል።",
@@ -53,21 +53,16 @@ export default function ContentPage() {
     return (
         <main className="min-h-screen bg-slate-950 pt-28 pb-20 relative overflow-hidden">
             {/* Background elements to match overall theme */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/10 blur-[120px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-sky-500/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-sky-950/40 to-slate-950 opacity-100 z-0" />
+            <motion.div
+                className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(14,165,233,0.15)_0%,transparent_60%)] z-0 pointer-events-none"
+                animate={{ scale: [1, 1.1, 1], opacity: [0.6, 0.9, 0.6] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="fixed top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="fixed bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Breadcrumb / Back Link */}
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="mb-8"
-                >
-                    <Link href="/" className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 transition-colors group">
-                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                        <span className="font-bold text-sm tracking-wide uppercase">{t.back}</span>
-                    </Link>
-                </motion.div>
 
                 {/* Header */}
                 <div className="mb-12">
