@@ -68,7 +68,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       articles: [
         {
           title: "1. Resurrection: Religious Myth or Historical Fact?",
-          description: "Many people view the resurrection of Christ as a religious myth lacking evidence. However, many historians—without even using the Bible as a source—point to ancient non-Christian writers like Tacitus and Josephus to show that the resurrection is supported by strong historical evidence.",
+          description: "Many people view the resurrection of Christ as a religious myth lacking evidence.",
           link: "/content"
         },
         {
@@ -95,7 +95,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       articles: [
         {
           title: "1. ትንሳኤ፡ ኃይማኖታዊ ተረት ወይስ ታሪካዊ እውነታ?",
-          description: "ቊጥራቸው ቀላል ያይደሉ ሰዎች፥ የክርስቶስን ትንሳኤ፥ ማረጋገጫ እንደሌለው የኃይማኖት ተረት አድርገው ይመለከቱታል። ነገር ግን ብዙ የታሪክ ምሁራን መጽሐፍ ቅዱስን እንደ ምንጭ ሳይጠቀሙ፥ እንደ ታሲተስ እና ጆሲፈስ ያሉ ክርስቲያን ያልሆኑ ጥንታዊ የታሪክ ጸሐፊያን የጻፉትን ብቻ በመመልከት የክርስቶስ ትንሳኤ ጠንከር ባሉ ታሪካዊ ማስረጃዎች የተደገፈ እንደሆነ ይገልጻሉ።",
+          description: "ቊጥራቸው ቀላል ያይደሉ ሰዎች፥ የክርስቶስን ትንሳኤ፥ ማረጋገጫ እንደሌለው የኃይማኖት ተረት አድርገው ይመለከቱታል",
           link: "/content"
         },
         {
