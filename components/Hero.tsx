@@ -65,12 +65,19 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       question: "Are you ready to see lives transformed in Addis Ababa?",
       description: "EvaSUE and African Evangelistic Enterprise (AEE-Ethiopia) are teaming up for the \"Jesus is All About Life\" (JAAL) Easter Outreach this April! Our goal is simple: Reach every campus and beyond with the hope of the Gospel.",
       training: "To get mission-ready, we are hosting a Full Day Training & Consultation on Mar 14, 2026, exclusively for Main Leaders and Evan & Mission Mobilizers Leaders.",
-      locations: [
-        { name: "Central 1 campuses", location: "Megenagna Full Gospel Church" },
-        { name: "Central 2 campuses", location: "Lideta Assemblies of God Church" }
+      articles: [
+        {
+          title: "1. Resurrection: Religious Myth or Historical Fact?",
+          description: "Many people view the resurrection of Christ as a religious myth lacking evidence. However, many historians—without even using the Bible as a source—point to ancient non-Christian writers like Tacitus and Josephus to show that the resurrection is supported by strong historical evidence.",
+          link: "/content"
+        },
+        {
+          title: "2. A Living Hope",
+          description: "In his first letter, Peter speaks urgently about a living hope. This is the hope of eternal life, grounded in the fact that Jesus Christ did not remain dead; He is alive now.",
+          link: "/content"
+        }
       ],
-      time: "8:30 AM – 5:00 PM",
-      cost: "FREE (Registration is required!)",
+      readMore: "Read more",
       verse: "\"...In his great mercy he has given us new birth into a living hope...\" (1 Peter 1:3)",
       cta: "Register Now",
       admin: "Admin"
@@ -85,12 +92,19 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       question: "የወንጌል ጥሪ ለአዲስ አበባ ካምፓሶች!",
       description: "ኢቫሱ (EvaSUE) ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE) ጋር በመተባበር \"ኢየሱስ ለጥያቄ ሁሉ መልስ ነው\" (JAAL) በሚል መሪ ቃል ታላቅ የትንሳኤ ወንጌል ዘመቻ አዘጋጅቷል።",
       training: "መጋቢት 05 ቀን 2018 ዓ.ም. ለዋና መሪዎች እና ለወንጌል አስተባባሪዎች የተዘጋጀ፥ ለዚህ ታላቅ ተልዕኮ ራሳችንን የምናዘጋጅበት የሙሉ ቀን ሥልጠና ይጠብቀናል!",
-      locations: [
-        { name: "ለሴንትራል 1 ተማሪዎች", location: "መገናኛ ሙሉ ወንጌል ቤተክርስቲያን" },
-        { name: "ለሴንትራል 2 ተማሪዎች", location: "ልደታ ጉባዔ እግዚአብሔር ቤተክርስቲያን" }
+      articles: [
+        {
+          title: "1. ትንሳኤ፡ ኃይማኖታዊ ተረት ወይስ ታሪካዊ እውነታ?",
+          description: "ቊጥራቸው ቀላል ያይደሉ ሰዎች፥ የክርስቶስን ትንሳኤ፥ ማረጋገጫ እንደሌለው የኃይማኖት ተረት አድርገው ይመለከቱታል። ነገር ግን ብዙ የታሪክ ምሁራን መጽሐፍ ቅዱስን እንደ ምንጭ ሳይጠቀሙ፥ እንደ ታሲተስ እና ጆሲፈስ ያሉ ክርስቲያን ያልሆኑ ጥንታዊ የታሪክ ጸሐፊያን የጻፉትን ብቻ በመመልከት የክርስቶስ ትንሳኤ ጠንከር ባሉ ታሪካዊ ማስረጃዎች የተደገፈ እንደሆነ ይገልጻሉ።",
+          link: "/content"
+        },
+        {
+          title: "2. ተስፈኛው ባለ ርስት",
+          description: "ጴጥሮስ በመጀመሪያ መልእክቱ አጥብቆ የሚናገረው ስለ ሕያው ተስፋ ነው። ይህ ተስፋ የዘላለም ሕይወት ተስፋ ነው፤ ምክንያቱም ኢየሱስ ክርስቶስ ሞቶ አልቀረም፤ አሁን ሕያው ነው።",
+          link: "/content"
+        }
       ],
-      time: "ከጠዋቱ 2፡30 እስከ ቀኑ 11፡00 ሰዓት",
-      cost: "በነጻ (ግን አስቀድሞ መመዝገብ አስፈላጊ ነው)",
+      readMore: "ተጨማሪ ያንብቡ",
       verse: "\"...እርሱ ከታላቅ ምሕረቱ የተነሣ በኢየሱስ ክርስቶስ ከሞት መነሣት ምክንያት ለሕያው ተስፋ በሚሆን አዲስ ልደት...\" (1ኛ ጴጥሮስ 1:3)",
       cta: "አሁን ይመዝገቡ",
       admin: "አስተዳዳሪ"
@@ -255,50 +269,25 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
                 </div>
               </div>
             </motion.div>
-
-            {/* Event Details Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
-              {/* Locations */}
-              <motion.div variants={itemVariants} className="space-y-4">
-                {t.locations.map((loc, index) => (
-                  <div key={index} className="group relative bg-white/5 backdrop-blur-lg rounded-2xl p-5 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] shadow-xl overflow-hidden">
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-sky-400 to-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-sky-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-sky-500/30 transition-colors">
-                        <MapPin className="w-6 h-6 text-sky-400" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-white text-base sm:text-lg mb-0.5">{loc.name}</p>
-                        <p className="text-sm sm:text-base text-sky-200/90">{loc.location}</p>
-                      </div>
+            {/* Articles Grid */}
+            <motion.div variants={itemVariants} className="max-w-6xl mx-auto mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                {t.articles.map((article, index) => (
+                  <div key={index} className="flex flex-col relative group bg-slate-900/40 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-sky-400/20 shadow-2xl hover:border-sky-400/50 transition-all duration-500 overflow-hidden text-left">
+                    <div className="absolute top-0 right-0 p-32 bg-sky-500/5 blur-[100px] rounded-full pointer-events-none group-hover:bg-sky-500/10 transition-colors duration-700" />
+                    <h3 className="relative z-10 text-xl md:text-2xl font-bold text-white mb-4 group-hover:text-sky-300 transition-colors">{article.title}</h3>
+                    <p className="relative z-10 text-sky-100/80 mb-6 leading-relaxed flex-grow">
+                      {article.description}
+                    </p>
+                    <div className="relative z-10 mt-auto">
+                      <Link href={article.link} className="inline-flex items-center text-sky-400 hover:text-sky-300 font-semibold transition-colors group/link">
+                        {t.readMore} <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
                   </div>
                 ))}
-              </motion.div>
-
-              {/* Time and Cost */}
-              <motion.div variants={itemVariants} className="flex flex-col gap-4">
-                <div className="flex items-center gap-5 bg-gradient-to-r from-sky-500/10 to-transparent backdrop-blur-lg rounded-2xl p-6 border border-sky-400/20 shadow-lg hover:border-sky-400/40 transition-all">
-                  <div className="w-12 h-12 rounded-full bg-sky-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.3)]">
-                    <Clock className="w-6 h-6 text-sky-400" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm text-sky-300 uppercase tracking-wider font-bold mb-1">Time</p>
-                    <span className="text-lg font-bold text-white">{t.time}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 bg-gradient-to-r from-emerald-500/10 to-transparent backdrop-blur-lg rounded-2xl p-6 border border-emerald-400/20 shadow-lg hover:border-emerald-400/40 transition-all">
-                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-                    <Sparkles className="w-6 h-6 text-emerald-400" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm text-emerald-300 uppercase tracking-wider font-bold mb-1">Entry</p>
-                    <span className="text-lg font-bold text-white">{t.cost}</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
             {/* Bible Verse */}
             <motion.div variants={itemVariants} className="max-w-3xl mx-auto text-center mb-12">
@@ -310,27 +299,6 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
                   {t.verse}
                 </p>
               </div>
-            </motion.div>
-
-            {/* CTA Button */}
-            <motion.div variants={itemVariants} className="flex justify-center pb-8">
-              <Link href="/register" className="group relative inline-flex">
-                {/* Outer Glow */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-sky-400 via-blue-500 to-sky-300 rounded-full blur-lg opacity-40 group-hover:opacity-80 transition duration-500 group-hover:duration-200 animate-pulse"></div>
-
-                {/* Button */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative flex items-center justify-center gap-3 px-10 py-3.5 bg-white text-slate-950 font-black text-lg rounded-full overflow-hidden shadow-2xl transition-all"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-sky-100 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <span className="relative z-10 tracking-widest uppercase">{t.cta}</span>
-                  <div className="relative z-10 w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center group-hover:bg-sky-500 group-hover:shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-all duration-300">
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </motion.button>
-              </Link>
             </motion.div>
           </motion.div>
         </div>
