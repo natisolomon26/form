@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Youtube, FileText, Share2, Calendar, User, ArrowLeft } from "lucide-react";
+import { Youtube, FileText, Share2, Calendar, User, ArrowLeft, Download } from "lucide-react";
 import Link from "next/link";
 
 export default function ContentPage() {
@@ -19,27 +19,34 @@ export default function ContentPage() {
 
     const content = {
         en: {
-            title: "Easter EvangelisticOutreach",
+            title: "Easter Evangelistic Outreach",
             subtitle: "Jesus Is All About Life (JAAL)",
-            articleTitle: "ተስፈኛው ባለ ርስት",
-            articleContent1: "ጴጥሮስ በመጀመሪያ መልእክቱ አጥብቆ የሚናገረው ስለ ሕያው ተስፋ ነው። ይህ ተስፋ የዘላለም ሕይወት ተስፋ ነው፤ ምክንያቱም ኢየሱስ ክርስቶስ ሞቶ አልቀረም፤ አሁን ሕያው ነው።",
-            articleContent2: "This outreach isn't just about sharing a message; it's about building a movement of disciples who understand their identity in Christ and their calling to influence society. We believe that when a student's life is changed, the future of our nation is impacted.",
-            articleContent3: "Watch the video to learn more about our training programs, mobilization strategies, and how you can be part of this life-changing mission.",
+            articleTitle: "A Living Hope",
+            articleContent1: "A Perfect Future: It is a perfect future where we live with God forever. In that place, there is no sorrow, tears, suffering, or crying. While we live in a world where light and darkness alternate, a life of never-fading light awaits us where Christ Himself shines. There is no pain from the loss of loved ones, no regret, and no fear.",
+            articleContent2: "Lord Jesus, I believe that You died for my sins and rose from the dead to cleanse me. I give my life to You, and today I lean on Your hope. Amen.",
+            articles: [
+                { title: "Resurrection: Religious Myth or Historical Fact?", link: "/content/Resurrection.docx" },
+                { title: "A Living Hope", link: "/content/The Hopeful Heir.docx" }
+            ],
+            downloadText: "Download Document",
             videoTitle: "Watch Our Mission Documentary",
-            tags: ["Outreach", "Campus Ministry", "EvaSUE", "Evangelism"],
-            author: "EvaSUE Communications",
-            date: "March 2026",
+            videoDescription: "Watch more videos in our EvaSUE Youtube channel and subscribe to get updated videos",
             back: "Back to Home"
         },
         am: {
             title: "የፋሲካ የወንጌል ስርጭት",
             subtitle: "ኢየሱስ ለጥያቄ ሁሉ መልስ ነው (JAAL)",
-            articleTitle: "ለካምፓስ ለውጥ ያለን ራዕይ",
-            articleContent1: "በኢቫሱ ሁልጊዜም ግባችን በኢትዮጵያ ካምፓሶች ውስጥ የሚገኙ ተማሪዎች በሙሉ በወንጌል ኃይል ተለውጠው ማየት ነው። የትንሳኤን በዓል አስመልክቶ ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE-Ethiopia) ጋር በመተባበር 'ኢየሱስ ለጥያቄ ሁሉ መልስ ነው' (JAAL) የተሰኘ ታላቅ ዘመቻ ጀምረናል።",
-            articleContent2: "ይህ የወንጌል ስርጭት መልእክት ማድረስ ብቻ አይደለም፤ በክርስቶስ ያላቸውን ማንነት የተረዱ እና ማህበረሰቡን ተፅእኖ እንዲፈጥሩ የተጠሩ ደቀመዛሙርትን እንቅስቃሴ መገንባት ነው። በአንድ ተማሪ ሕይወት ውስጥ ለውጥ ሲመጣ፣ የሀገራችን የወደፊት ሁኔታ ላይ ተፅእኖ እንደሚፈጥር እናምናለን።",
-            articleContent3: "ስለ ስልጠና ፕሮግራሞቻችን፣ ስለ ንቅናቄ ስልቶቻችን እና የዚህ የለውጥ ጉዞ አካል መሆን ስለሚችሉበት ሁኔታ የበለጠ ለማወቅ ቪዲዮውን ይመልከቱ።",
+            articleTitle: "በክርስቶስ ያለው ርስት — ምንድን ነው?",
+            articleContent1: "በመጀመሪያ፣ ይህ ተስፋ የተገባልን ርስት ለዘላለም ከእግዚአብሔር ጋር የምንኖረው ፍጹም የኾነ የወደፊት ሕይወት ነው። በዚያ ሐዘን፣ እንባ፣ መከራ እና ልቅሶ የለም። ጨለማ እና ብርሃን በሚቆራረጥበት በዚህ ዓለም፥ ክርስቶስ ራሱ የሚያበራበት ፈጽሞ የማይጠፋ የብርሃን ሕይወት ይጠብቀናል። ከምንወዳቸው እና ከሚወዱን ሰዎች መለየታችን የሚፈጥርብን ሕመም በዚያ ሥፍራ የለም። ሕመም፣ ጸጸት እና ፍርሃት የማይኖርበት ሥፍራ ነው።",
+            articleContent2: "ጌታ ኢየሱስ ሆይ፣ ስለኀጢአቴ እንደሞትክ እኔንም ከኀጢአቴ ለማንጻት ከሞት እንደተነሳህ አምናለሁ፤ ሕይወቴን ለአንተ እሰጣለሁ፣ ዛሬም በተስፋህ እደገፋለሁ። አሜን!",
+            articles: [
+                { title: "ትንሳኤ፡ ኃይማኖታዊ ተረት ወይስ ታሪካዊ እውነታ?", link: "/content/ትንሳኤ_ኃይማኖታዊ_ተረት_ወይስ_ታሪካዊ_እውነታ.docx" },
+                { title: "ተስፈኛው ባለ ርስት", link: "/content/ተስፈኛው ባለርስት.docx" }
+            ],
+            downloadText: "ሰነዱን ያውርዱ",
             videoTitle: "የተልዕኮ ዘጋቢ ፊልማችንን ይመልከቱ",
-            tags: ["የወንጌል ስርጭት", "የካምፓስ አገልግሎት", "ኢቫሱ", "ወንጌላዊነት"],
+            videoDescription: "ተጨማሪ ቪዲዮዎችን በኢቫሱ የዩቲዩብ ቻናላችን ይመልከቱ፤ አዳዲስ ቪዲዮዎችን ለማግኘት ሰብስክራይብ ያድርጉ።",
+            tags: ["የወንጌል ስርጭት", "የካምፓስ አገልግሎት", "ኢቫሱ", "ወንጌላዊነት", "ጽሑፎች"],
             author: "የኢቫሱ ኮሙኒኬሽን",
             date: "መጋቢት 2018",
             back: "ወደ መነሻ ተመለስ"
@@ -97,17 +104,6 @@ export default function ContentPage() {
                         className="lg:col-span-7 space-y-8"
                     >
                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl">
-                            <div className="flex flex-wrap items-center gap-6 mb-8 text-slate-400 text-sm font-medium">
-                                <div className="flex items-center gap-2">
-                                    <User className="w-4 h-4 text-sky-500" />
-                                    <span>{t.author}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4 text-sky-500" />
-                                    <span>{t.date}</span>
-                                </div>
-                            </div>
-
                             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
                                 {t.articleTitle}
                             </h2>
@@ -116,35 +112,27 @@ export default function ContentPage() {
                                 <p className="text-slate-300 text-lg leading-relaxed mb-6">
                                     {t.articleContent1}
                                 </p>
-                                <div className="my-8 p-6 bg-sky-500/10 border-l-4 border-sky-500 rounded-r-xl italic text-sky-100 font-medium">
-                                    {t.articleContent2}
-                                </div>
-                                <p className="text-slate-300 text-lg leading-relaxed">
-                                    {t.articleContent3}
-                                </p>
-                            </div>
 
-                            <div className="mt-10 pt-8 border-t border-white/10">
-                                <div className="flex flex-wrap gap-2">
-                                    {t.tags.map((tag, idx) => (
-                                        <span key={idx} className="px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs font-bold text-sky-400 uppercase tracking-wider">
-                                            {tag}
-                                        </span>
+                                {/* Document Downloads Area */}
+                                <div className="space-y-4 my-8">
+                                    {t.articles?.map((article, idx) => (
+                                        <div key={idx} className="p-6 bg-sky-500/10 border-l-4 border-sky-500 rounded-r-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-sky-500/20 transition-colors">
+                                            <h3 className="text-sky-100 font-bold text-lg m-0">{article.title}</h3>
+                                            <a href={article.link} download className="inline-flex items-center gap-2 px-5 py-2.5 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl transition-colors shadow-lg shadow-sky-500/30 text-sm whitespace-nowrap">
+                                                <Download className="w-4 h-4" />
+                                                {t.downloadText}
+                                            </a>
+                                        </div>
                                     ))}
+                                </div>
+
+                                <div className="my-8 p-6 bg-white/5 border border-white/10 rounded-2xl italic text-sky-100 font-medium text-lg leading-relaxed">
+                                    {t.articleContent2}
                                 </div>
                             </div>
                         </div>
 
                         {/* Newsletter or extra info callout */}
-                        <div className="bg-gradient-to-r from-sky-600/20 to-indigo-600/20 backdrop-blur-md border border-sky-400/20 rounded-3xl p-8 flex items-center justify-between group">
-                            <div>
-                                <h3 className="text-white font-bold text-lg mb-1">Stay updated with our missions</h3>
-                                <p className="text-slate-400 text-sm italic">Join our telegram channel for real-time impact stories.</p>
-                            </div>
-                            <div className="w-12 h-12 bg-sky-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-sky-500/20 group-hover:scale-110 transition-transform duration-300">
-                                <Share2 className="w-6 h-6" />
-                            </div>
-                        </div>
                     </motion.div>
 
                     {/* Right Side: YouTube Embedded Video */}
@@ -168,7 +156,7 @@ export default function ContentPage() {
                                 <div className="relative aspect-video bg-slate-900 rounded-[1.5rem] overflow-hidden border border-white/10 shadow-2xl">
                                     <iframe
                                         className="w-full h-full"
-                                        src="https://www.youtube.com/embed/2eTBvxoR21U?" // Placeholder, I should probably use a relevant one or let the user provide it
+                                        src="https://www.youtube.com/embed/1vdYw0VzReU?" // Placeholder, I should probably use a relevant one or let the user provide it
                                         title="EvaSUE Campus Outreach"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowFullScreen
@@ -179,25 +167,9 @@ export default function ContentPage() {
                             <div className="mt-6 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
                                 <h4 className="text-white font-bold mb-2">{t.videoTitle}</h4>
                                 <p className="text-slate-400 text-sm leading-relaxed">
-                                    Join our mission leaders as they discuss the implementation of JAAL in major universities across Addis Ababa.
+                                    {t.videoDescription}
                                 </p>
-                                <div className="mt-4 flex items-center gap-4 text-xs font-bold text-sky-400 tracking-widest uppercase">
-                                    <span>12:45 Duration</span>
-                                    <span className="w-1 h-1 bg-slate-600 rounded-full" />
-                                    <span>HD Quality</span>
-                                </div>
-                            </div>
 
-                            {/* Related content links could go here */}
-                            <div className="mt-8 grid grid-cols-2 gap-4">
-                                <div className="p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
-                                    <FileText className="w-5 h-5 text-sky-500 mb-2 group-hover:scale-110 transition-transform" />
-                                    <span className="text-xs font-bold text-slate-300">Strategic Plan</span>
-                                </div>
-                                <div className="p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
-                                    <div className="w-5 h-5 text-emerald-500 mb-2 group-hover:scale-110 transition-transform font-bold">PDF</div>
-                                    <span className="text-xs font-bold text-slate-300">Training Manual</span>
-                                </div>
                             </div>
                         </div>
                     </motion.div>
