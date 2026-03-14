@@ -64,7 +64,6 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       subtitle: "Jesus Is All About Life • JAAL",
       question: "Are you ready to see lives transformed in Addis Ababa?",
       description: "EvaSUE and African Evangelistic Enterprise (AEE-Ethiopia) are teaming up for the \"Jesus is All About Life\" (JAAL) Easter Outreach this April! Our goal is simple: Reach every campus and beyond with the hope of the Gospel.",
-      training: "To get mission-ready, we are hosting a Full Day Training & Consultation on Mar 14, 2026, exclusively for Main Leaders and Evan & Mission Mobilizers Leaders.",
       articles: [
         {
           title: "1. Resurrection: Religious Myth or Historical Fact?",
@@ -91,7 +90,6 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
       subtitle: "ኢየሱስ ለጥያቄ ሁሉ መልስ ነው • JAAL",
       question: "የወንጌል ጥሪ ለአዲስ አበባ ካምፓሶች!",
       description: "ኢቫሱ (EvaSUE) ከአፍሪካ ኢቫንጀልስቲክ ኢንተርፕራይዝ (AEE) ጋር በመተባበር \"ኢየሱስ ለጥያቄ ሁሉ መልስ ነው\" (JAAL) በሚል መሪ ቃል ታላቅ የትንሳኤ ወንጌል ዘመቻ አዘጋጅቷል።",
-      training: "መጋቢት 05 ቀን 2018 ዓ.ም. ለዋና መሪዎች እና ለወንጌል አስተባባሪዎች የተዘጋጀ፥ ለዚህ ታላቅ ተልዕኮ ራሳችንን የምናዘጋጅበት የሙሉ ቀን ሥልጠና ይጠብቀናል!",
       articles: [
         {
           title: "1. ትንሳኤ፡ ኃይማኖታዊ ተረት ወይስ ታሪካዊ እውነታ?",
@@ -254,21 +252,7 @@ export default function Hero({ backgroundImage = "/images/back3.JPG" }: HeroProp
             </motion.div>
 
             {/* Training Info */}
-            <motion.div variants={itemVariants} className="max-w-4xl mx-auto mb-12">
-              <div className="relative group bg-slate-900/40 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-sky-400/20 shadow-2xl hover:border-sky-400/40 transition-all duration-500 overflow-hidden">
-                <div className="absolute top-0 right-0 p-32 bg-sky-500/10 blur-[100px] rounded-full pointer-events-none group-hover:bg-sky-500/20 transition-colors duration-700" />
-                <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-sky-500/30">
-                    <Calendar className="w-7 h-7 text-white" />
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <p className="text-lg sm:text-xl text-white font-medium leading-relaxed">
-                      {t.training}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+
             {/* Articles Grid */}
             <motion.div variants={itemVariants} className="max-w-6xl mx-auto mb-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">

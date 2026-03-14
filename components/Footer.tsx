@@ -89,12 +89,6 @@ export default function Footer() {
               </span>
             </Link>
           </div>
-
-          <div className="w-full max-w-4xl mx-auto border-t border-white/10 pt-8 mt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-slate-500 text-xs sm:text-sm text-center sm:text-left">
-              {t.copyright}
-            </p>
-          </div>
         </div>
       </div>
     </footer>
