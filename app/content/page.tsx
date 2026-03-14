@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Youtube, FileText, Share2, Calendar, User, ArrowLeft, Download, BookOpen, Heart, Sparkles } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Youtube, FileText, Share2, Calendar, User, ArrowLeft, Download, BookOpen, Heart, Sparkles, Clock } from "lucide-react";
 import Link from "next/link";
 
 type ContentBlock =
@@ -19,6 +19,13 @@ type Article = {
 export default function ContentPage() {
     const [language, setLanguage] = useState<'en' | 'am'>('en');
     const [mounted, setMounted] = useState(false);
+
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     useEffect(() => {
         setMounted(true);
@@ -192,45 +199,67 @@ export default function ContentPage() {
 
     if (!mounted) return null;
 
-    const renderArticle = (article: typeof t.articles[0]) => (
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl h-full flex flex-col">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 border-b border-white/10 pb-4 flex items-center gap-3">
-                <BookOpen className="w-6 h-6 text-sky-400" />
-                {article.title}
-            </h2>
+    const renderArticle = (article: typeof t.articles[0]) => {
+        const readingTimeText = language === 'en' ? 'min read' : 'ደቂቃ ንባብ';
+        const calculateReadingTime = (blocks: ContentBlock[]) => {
+            const text = blocks.map(b => b.type === 'ul' ? b.items.join(' ') : (b.type === 'quote' ? b.text : (b.type === 'p' ? b.text : ''))).join(' ');
+            const words = text.trim().split(/\s+/).length;
+            return Math.max(1, Math.ceil(words / 200));
+        };
+        const readTime = calculateReadingTime(article.blocks);
+        const firstParagraphIndex = article.blocks.findIndex(b => b.type === 'p');
+
+        return (
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl h-full flex flex-col group/article hover:bg-white/[0.07] transition-all duration-500">
+            <div className="mb-8 border-b border-white/10 pb-6 flex flex-col gap-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3 leading-tight group-hover/article:text-sky-300 transition-colors">
+                    <BookOpen className="w-7 h-7 text-sky-400 shrink-0" />
+                    {article.title}
+                </h2>
+                <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                    <Clock className="w-4 h-4 text-sky-500" />
+                    <span>{readTime} {readingTimeText}</span>
+                </div>
+            </div>
 
             <div className="space-y-6 flex-1">
                 {article.blocks.map((block, bIdx) => {
                     switch (block.type) {
                         case 'h3':
                             return (
-                                <h3 key={bIdx} className="text-xl sm:text-2xl font-bold text-sky-400 mt-8 mb-4 flex items-center gap-2">
-                                    <Sparkles className="w-5 h-5" />
+                                <h3 key={bIdx} className="text-xl sm:text-2xl font-bold text-sky-400 mt-10 mb-5 flex items-center gap-3">
+                                    <Sparkles className="w-5 h-5 text-yellow-400" />
                                     {block.text}
                                 </h3>
                             );
                         case 'p':
+                            const isFirstPara = bIdx === firstParagraphIndex;
                             return (
-                                <p key={bIdx} className="text-slate-300 text-lg leading-relaxed">
+                                <p key={bIdx} className={`text-slate-300 text-[1.1rem] leading-[1.8] ${isFirstPara ? 'first-letter:text-6xl first-letter:font-black first-letter:text-sky-400 first-letter:mr-3 first-letter:float-left first-letter:leading-[0.8] first-letter:mt-2 first-line:tracking-wide' : ''}`}>
                                     {block.text}
                                 </p>
                             );
                         case 'ul':
                             return (
-                                <ul key={bIdx} className="grid grid-cols-1 gap-4 my-8">
+                                <ul key={bIdx} className="grid grid-cols-1 gap-4 my-8 relative z-10">
                                     {block.items.map((item, iIdx) => (
-                                        <li key={iIdx} className="flex items-start gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors shadow-lg hover:shadow-sky-900/20 group">
-                                            <div className="mt-1.5 w-3 h-3 rounded-full bg-sky-500 shrink-0 shadow-[0_0_12px_rgba(14,165,233,0.8)] group-hover:scale-125 transition-transform" />
-                                            <span className="text-slate-300 text-base flex-1">{item}</span>
+                                        <li key={iIdx} className="flex items-start gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-sky-900/20 hover:-translate-y-1 group">
+                                            <div className="mt-1.5 w-3 h-3 rounded-full bg-sky-500 shrink-0 shadow-[0_0_12px_rgba(14,165,233,0.8)] group-hover:scale-150 group-hover:bg-yellow-400 transition-all duration-300" />
+                                            <span className="text-slate-300 text-[1.05rem] leading-relaxed flex-1 group-hover:text-white transition-colors">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
                             );
                         case 'quote':
                             return (
-                                <div key={bIdx} className="my-8 p-6 bg-white/5 border border-sky-500/30 rounded-2xl italic text-sky-100 font-medium text-lg leading-relaxed border-l-4 border-l-sky-500 shadow-xl shadow-sky-900/20">
-                                    {block.text}
-                                </div>
+                                <blockquote key={bIdx} className="my-12 relative px-4">
+                                    <div className="absolute -top-6 -left-2 text-sky-500/20 text-7xl font-serif select-none pointer-events-none">"</div>
+                                    <div className="relative z-10 p-8 bg-gradient-to-br from-sky-500/10 via-blue-500/5 to-transparent border-l-4 border-l-sky-500 rounded-r-3xl text-sky-100 font-medium text-xl sm:text-2xl leading-relaxed italic shadow-xl shadow-sky-900/10 flex items-center gap-6">
+                                        <div className="w-1.5 h-full absolute left-0 top-0 bg-sky-400 blur-sm opacity-50"></div>
+                                        <p className="relative z-10">{block.text}</p>
+                                    </div>
+                                    <div className="absolute -bottom-10 right-4 text-sky-500/20 text-7xl font-serif select-none pointer-events-none rotate-180">"</div>
+                                </blockquote>
                             );
                         default:
                             return null;
@@ -238,10 +267,14 @@ export default function ContentPage() {
                 })}
             </div>
         </div>
-    );
+    )};
 
     return (
         <main className="min-h-screen bg-slate-950 pt-28 pb-20 relative overflow-hidden">
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-sky-500 to-blue-400 origin-left z-50 shadow-[0_0_15px_rgba(14,165,233,0.8)]"
+                style={{ scaleX }}
+            />
             {/* Background elements to match overall theme */}
             <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-sky-950/40 to-slate-950 opacity-100 z-0" />
             <motion.div
@@ -254,25 +287,24 @@ export default function ContentPage() {
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
-                <div className="mb-12">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
-                    >
-                        {t.title}
-                    </motion.h1>
+                <div className="mb-16 relative">
+                    <div className="absolute -top-10 -left-10 w-40 h-40 bg-sky-500/20 rounded-full blur-3xl pointer-events-none" />
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="flex items-center gap-3"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-sm font-bold tracking-widest uppercase mb-6 backdrop-blur-md shadow-lg shadow-sky-900/20"
                     >
-                        <div className="h-1 w-12 bg-sky-500 rounded-full" />
-                        <p className="text-sky-400 font-bold tracking-widest uppercase text-sm sm:text-base">
-                            {t.subtitle}
-                        </p>
+                        <Sparkles className="w-4 h-4" />
+                        <span>{t.subtitle}</span>
                     </motion.div>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-sky-100 to-sky-400 mb-6 leading-[1.1] drop-shadow-md"
+                    >
+                        {t.title}
+                    </motion.h1>
                 </div>
 
                 {/* Main Grid Content - Equal Height Cards */}

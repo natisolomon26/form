@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavbarWrapper from "@/components/NavbarWrapper";
-import Footer from "@/components/Footer";
 import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
 
@@ -28,9 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavbarWrapper />
-        {children}
-        <Footer />
+        <NavbarWrapper>
+          {children}
+        </NavbarWrapper>
         <Analytics />
       </body>
     </html>

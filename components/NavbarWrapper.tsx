@@ -2,19 +2,26 @@
 
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-export default function NavbarWrapper() {
+export default function NavbarWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // Don't render navbar on dashboard or admin pages
-  const hideNavbar =
+  // Don't render navbar and footer on dashboard or admin pages
+  const hideLayout =
     pathname?.startsWith('/dashboard') ||
     pathname?.startsWith('/admin/signin') ||
     pathname?.startsWith('/admin/signup');
 
-  if (hideNavbar) {
-    return null;
+  if (hideLayout) {
+    return <>{children}</>;
   }
 
-  return <Navbar />;
+  return (
+    <>
+      <Navbar />
+      {children}
+      <Footer />
+    </>
+  );
 }
