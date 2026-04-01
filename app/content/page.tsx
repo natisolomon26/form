@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Youtube, FileText, Share2, Calendar, User, ArrowLeft, Download, BookOpen, Heart, Sparkles, Clock } from "lucide-react";
 import Link from "next/link";
+import VideoSlider from "@/components/VideoSlider";
 
 type ContentBlock =
     | { type: 'h3'; text: string }
@@ -210,64 +211,65 @@ export default function ContentPage() {
         const firstParagraphIndex = article.blocks.findIndex(b => b.type === 'p');
 
         return (
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl h-full flex flex-col group/article hover:bg-white/[0.07] transition-all duration-500">
-            <div className="mb-8 border-b border-white/10 pb-6 flex flex-col gap-4">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3 leading-tight group-hover/article:text-sky-300 transition-colors">
-                    <BookOpen className="w-7 h-7 text-sky-400 shrink-0" />
-                    {article.title}
-                </h2>
-                <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
-                    <Clock className="w-4 h-4 text-sky-500" />
-                    <span>{readTime} {readingTimeText}</span>
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl h-full flex flex-col group/article hover:bg-white/[0.07] transition-all duration-500">
+                <div className="mb-8 border-b border-white/10 pb-6 flex flex-col gap-4">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3 leading-tight group-hover/article:text-sky-300 transition-colors">
+                        <BookOpen className="w-7 h-7 text-sky-400 shrink-0" />
+                        {article.title}
+                    </h2>
+                    <div className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+                        <Clock className="w-4 h-4 text-sky-500" />
+                        <span>{readTime} {readingTimeText}</span>
+                    </div>
+                </div>
+
+                <div className="space-y-6 flex-1">
+                    {article.blocks.map((block, bIdx) => {
+                        switch (block.type) {
+                            case 'h3':
+                                return (
+                                    <h3 key={bIdx} className="text-xl sm:text-2xl font-bold text-sky-400 mt-10 mb-5 flex items-center gap-3">
+                                        <Sparkles className="w-5 h-5 text-yellow-400" />
+                                        {block.text}
+                                    </h3>
+                                );
+                            case 'p':
+                                const isFirstPara = bIdx === firstParagraphIndex;
+                                return (
+                                    <p key={bIdx} className={`text-slate-300 text-[1.1rem] leading-[1.8] ${isFirstPara ? 'first-letter:text-6xl first-letter:font-black first-letter:text-sky-400 first-letter:mr-3 first-letter:float-left first-letter:leading-[0.8] first-letter:mt-2 first-line:tracking-wide' : ''}`}>
+                                        {block.text}
+                                    </p>
+                                );
+                            case 'ul':
+                                return (
+                                    <ul key={bIdx} className="grid grid-cols-1 gap-4 my-8 relative z-10">
+                                        {block.items.map((item, iIdx) => (
+                                            <li key={iIdx} className="flex items-start gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-sky-900/20 hover:-translate-y-1 group">
+                                                <div className="mt-1.5 w-3 h-3 rounded-full bg-sky-500 shrink-0 shadow-[0_0_12px_rgba(14,165,233,0.8)] group-hover:scale-150 group-hover:bg-yellow-400 transition-all duration-300" />
+                                                <span className="text-slate-300 text-[1.05rem] leading-relaxed flex-1 group-hover:text-white transition-colors">{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                );
+                            case 'quote':
+                                return (
+                                    <blockquote key={bIdx} className="my-12 relative px-4">
+                                        <div className="absolute -top-6 -left-2 text-sky-500/20 text-7xl font-serif select-none pointer-events-none">"</div>
+                                        <div className="relative z-10 p-8 bg-gradient-to-br from-sky-500/10 via-blue-500/5 to-transparent border-l-4 border-l-sky-500 rounded-r-3xl text-sky-100 font-medium text-xl sm:text-2xl leading-relaxed italic shadow-xl shadow-sky-900/10 flex items-center gap-6">
+                                            <div className="w-1.5 h-full absolute left-0 top-0 bg-sky-400 blur-sm opacity-50"></div>
+                                            <p className="relative z-10">{block.text}</p>
+                                        </div>
+                                        <div className="absolute -bottom-10 right-4 text-sky-500/20 text-7xl font-serif select-none pointer-events-none rotate-180">"</div>
+                                    </blockquote>
+                                );
+                            default:
+                                return null;
+                        }
+                    })}
                 </div>
             </div>
-
-            <div className="space-y-6 flex-1">
-                {article.blocks.map((block, bIdx) => {
-                    switch (block.type) {
-                        case 'h3':
-                            return (
-                                <h3 key={bIdx} className="text-xl sm:text-2xl font-bold text-sky-400 mt-10 mb-5 flex items-center gap-3">
-                                    <Sparkles className="w-5 h-5 text-yellow-400" />
-                                    {block.text}
-                                </h3>
-                            );
-                        case 'p':
-                            const isFirstPara = bIdx === firstParagraphIndex;
-                            return (
-                                <p key={bIdx} className={`text-slate-300 text-[1.1rem] leading-[1.8] ${isFirstPara ? 'first-letter:text-6xl first-letter:font-black first-letter:text-sky-400 first-letter:mr-3 first-letter:float-left first-letter:leading-[0.8] first-letter:mt-2 first-line:tracking-wide' : ''}`}>
-                                    {block.text}
-                                </p>
-                            );
-                        case 'ul':
-                            return (
-                                <ul key={bIdx} className="grid grid-cols-1 gap-4 my-8 relative z-10">
-                                    {block.items.map((item, iIdx) => (
-                                        <li key={iIdx} className="flex items-start gap-4 bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-lg hover:shadow-sky-900/20 hover:-translate-y-1 group">
-                                            <div className="mt-1.5 w-3 h-3 rounded-full bg-sky-500 shrink-0 shadow-[0_0_12px_rgba(14,165,233,0.8)] group-hover:scale-150 group-hover:bg-yellow-400 transition-all duration-300" />
-                                            <span className="text-slate-300 text-[1.05rem] leading-relaxed flex-1 group-hover:text-white transition-colors">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            );
-                        case 'quote':
-                            return (
-                                <blockquote key={bIdx} className="my-12 relative px-4">
-                                    <div className="absolute -top-6 -left-2 text-sky-500/20 text-7xl font-serif select-none pointer-events-none">"</div>
-                                    <div className="relative z-10 p-8 bg-gradient-to-br from-sky-500/10 via-blue-500/5 to-transparent border-l-4 border-l-sky-500 rounded-r-3xl text-sky-100 font-medium text-xl sm:text-2xl leading-relaxed italic shadow-xl shadow-sky-900/10 flex items-center gap-6">
-                                        <div className="w-1.5 h-full absolute left-0 top-0 bg-sky-400 blur-sm opacity-50"></div>
-                                        <p className="relative z-10">{block.text}</p>
-                                    </div>
-                                    <div className="absolute -bottom-10 right-4 text-sky-500/20 text-7xl font-serif select-none pointer-events-none rotate-180">"</div>
-                                </blockquote>
-                            );
-                        default:
-                            return null;
-                    }
-                })}
-            </div>
-        </div>
-    )};
+        )
+    };
 
     return (
         <main className="min-h-screen bg-slate-950 pt-28 pb-20 relative overflow-hidden">
@@ -334,21 +336,7 @@ export default function ContentPage() {
                                     <h3 className="text-white font-black uppercase tracking-widest text-sm">Featured Video</h3>
                                 </div>
 
-                                <div className="relative group">
-                                    {/* Glow effect */}
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-500 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-
-                                    {/* Video Container */}
-                                    <div className="relative aspect-video bg-slate-900 rounded-[1.5rem] overflow-hidden border border-white/10 shadow-2xl">
-                                        <iframe
-                                            className="w-full h-full"
-                                            src="https://www.youtube.com/embed/1vdYw0VzReU?"
-                                            title="EvaSUE Campus Outreach"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        />
-                                    </div>
-                                </div>
+                                <VideoSlider />
 
                                 <div className="mt-6 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
                                     <h4 className="text-white font-bold mb-2 flex items-center gap-2">
